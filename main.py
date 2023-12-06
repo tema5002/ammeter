@@ -2,6 +2,7 @@
 
 import disnake
 import wikipedia
+import asyncio
 from random import choice,randint
 from temalib import * # very silly library made by me if you need it then ask :typing:
 from disnake.ext import commands
@@ -100,17 +101,22 @@ sillyis=[
 @bot.event
 async def on_ready():
     print(f"@{bot.user} is real")
-    
-    h=open("splashes_channels.txt").read().split()
-    for every in h:
-        channel=bot.get_channel(int(every))
-        await channel.send(choice(splashes))
-        print(f"sending splash on {channel} ({channel.guild})")
 
+    print("setting presence")
     idiots=0
     for every in bot.guilds:
         idiots+=every.member_count
+        print(f"{idiots} people... ({every.member_count} people from {every.name})")
     await bot.change_presence(status=disnake.Status.online,activity=disnake.Game(f"with {idiots} idiots on {len(bot.guilds)} servers"))
+    print("presence changed")
+    
+    while True:
+        h=open("splashes_channels.txt").read().split()
+        for every in h:
+            channel=bot.get_channel(int(every))
+            await channel.send(choice(splashes))
+            print(f"sending splash on {channel} ({channel.guild})")
+        await asyncio.sleep(150)
 
 # sends message on mileankso mods when someone joins
 @bot.event
@@ -317,6 +323,8 @@ async def on_message(message):
         await message.channel.send("h "+"<:thubm_up:1152506629879758878>"*randint(1,10))
     if "crazy"==balls:
         await message.channel.send(file=disnake.File("crazygears.jpg"))
+    if "microsoft" in balls:
+        await message.channel.send("proglet software is better")
 
 
     # random reactions
@@ -349,6 +357,8 @@ async def on_message(message):
         await message.add_reaction(bot.get_emoji(1152507245540683776)) #sillyballs6969420 
     if "yeh" in balls:
         await message.add_reaction(bot.get_emoji(1180533040871649442)) #yeh
+    if "aperture sanity" in balls:
+        await message.add_reaction(bot.get_emoji(1181994734957375549)) #sane
     if "add sex"==balls:
         await message.add_reaction("💀")
     if "bitches" in balls or "bitchless" in balls:
@@ -554,8 +564,8 @@ async def rate(ctx, something: str):
         if something[1:].replace('s','')==" ampere" and something[0].isdigit():
             h=int(something[0])
         else: h=randint(0,5)
-        if h==0: message+="0 amperes! "+"<:no_ampere:1181978300462149642>"*5
-        elif 1<=h<=4: message+="1 ampere! "+"<:ampere:1181978287677915306>"*h+"<:no_ampere:1181978300462149642>"*(5-h)
+        if h==1: message+="1 ampere! <:ampere:1181978287677915306>"+"<:no_ampere:1181978300462149642>"*4
+        elif h==0 or 2<=h<=4: message+=f"{h} amperes! "+"<:ampere:1181978287677915306>"*h+"<:no_ampere:1181978300462149642>"*(5-h)
         elif h==5: message+="5 amperes! "+"<:grass_ampere:1181978296695664650>"*5
         else: message="im planning to add achievements so yes live with this here"
     await ctx.send(message)
