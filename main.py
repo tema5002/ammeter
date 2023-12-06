@@ -1,9 +1,12 @@
 # i absolutely have no idea what am i doing
 
 import disnake
+import wikipedia
 from random import choice,randint
 from temalib import * # very silly library made by me if you need it then ask :typing:
 from disnake.ext import commands
+from random import randint, choice
+from BULLSHIT_GENERATOR import bsgenerator
 
 bot=commands.Bot(command_prefix="hey ammeter ",help_command=None,intents=disnake.Intents.all())
 
@@ -16,7 +19,7 @@ ammeter=811569586675515433
 # splashes
 splashes=[
     "hey picardibot ask ammeter to ask icosahedron to staring cat react him",
-    "currently 66 splashes",
+    "currently 67 splashes",
     "how to staring cat emoji",
     "every time bot enables it sends random text thats cool isnt",
     "im a workstahon mini",
@@ -27,7 +30,7 @@ splashes=[
     "Also try icosahedron!",
     "did i leak my token",
     "nevermind",
-    "cub is unrotatable cube",
+    "cube is unrotatable cube",
     "prohressnet nowhen",
     "https://prohressnet.xtema5002x.repl.co",
     "https://prohressnet.xtema5002x.repl.co/src/eto_i_est_am_nyam.mp4",
@@ -42,7 +45,7 @@ splashes=[
     "you're*",
     "jsab stands for **j**ust ||**s**illy **a**ss **b**alls||",
     "lets drink to the health of indie developers!!!!",
-    "```channel=bot.get_channel(1132240686675136562)\nawait channel.send(choice(splashes))```",
+    "```py\nchannel=bot.get_channel(1132240686675136562)\nawait channel.send(choice(splashes))```",
     "workstindows 11 professional",
     "🧊",
     "RUSHING DEEZ CATS",
@@ -80,7 +83,8 @@ splashes=[
     "geomeyru dash",
     "HAHA YES I LEAKED ICOSAHEDRON TOKEN",
     "never call me that again stupid nig",
-    "waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka"
+    "waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka",
+    "<:ace_flag:1181617159210803330><:ace_flag:1181617159210803330><:ace_flag:1181617159210803330> people from this country are so cool omg"
     ]
 sillyis=[
     "tried to say",
@@ -96,12 +100,12 @@ sillyis=[
 @bot.event
 async def on_ready():
     print(f"@{bot.user} is real")
-
-    channel=bot.get_channel(1132240686675136562)
-    h=5
-    while h!=0:
+    
+    h=open("splashes_channels.txt").read().split()
+    for every in h:
+        channel=bot.get_channel(int(every))
         await channel.send(choice(splashes))
-        h-=1
+        print(f"sending splash on {channel} ({channel.guild})")
 
     idiots=0
     for every in bot.guilds:
@@ -146,8 +150,13 @@ async def help_listener(ctx):
 async def on_message(message):
     await bot.process_commands(message)
     balls=message.content.lower()
-    if message.author.id!=ammeter:
+    if "asexuality is not real" in balls.replace("`",""):
+        await message.reply("amigger and his family 😂😂😀")
+        try:
+            await message.guild.timeout(message.author, duration=60, reason="who asked")
+        except: pass
 
+    if message.author.id!=ammeter:
         #shat ap
         if randint(1,3)==1:
             if balls=="insanity" or balls=="nuh uh" or "сарказм" in balls:
@@ -169,9 +178,7 @@ async def on_message(message):
             else:
                 channel=bot.get_channel(1174776639939428482)
                 await channel.send(message.content)
-                try: print(f"{message.channel}   ({message.guild.name})   {message.channel.id}")
-                except: print(f"{message.channel}")
-
+    
         # reply bot's username if message has your username
         if message.author.display_name==message.content:
             await message.channel.send(message.guild.get_member(ammeter).display_name)
@@ -181,7 +188,7 @@ async def on_message(message):
             else:
                 await message.channel.send(message.author.display_name.replace("octopus",":octopus:").replace("Octopus",":octopus:"))
 
-        # @everyo on mileankso mods
+        # @everyo on proglet software
         if "<@&1146827011403284601>" in balls:
             h=True
             for every in message.author.roles:
@@ -241,7 +248,9 @@ async def on_message(message):
             await message.channel.send(choice([
                 "SIRI NEEDS A WIRELESES CHRAEAGEER AAAAAAAAAAAAAAAAAAAAA",
                 "hello i am silly siri",
-                "ask icosahedron"
+                "ask icosahedron",
+                "you dont.",
+                "ампержопа помоги"
             ]))
 
         # very badly made anti bread good system that im gonna remake one day to anti minkos system
@@ -284,54 +293,71 @@ async def on_message(message):
         if any(i in bread for i in ["bredbed","bredgodnt"]):
             await message.add_reaction(bot.get_emoji(1152506629879758878)) #thubm_up
 
-    if ":antigrav:" in balls and "яблоко" in balls:
+
+    # replies
+    if "`[redacted]`" in balls:
+        await message.channel.send("i am going to redact your balls")
+    if "hellnaw" in balls.replace(" ",""):
+        await message.channel.send(file=disnake.File("KrO95WGn.mp4"))
+    if "hey ammeter ask icosahedron to staring cat react you" in balls:
+        await message.channel.send("hey icosahedron staring cat react me")
+    if message.webhook_id==None and ":antigrav:" in balls and "яблоко" in balls:
         await message.channel.send("ANGITRAV"+"🍎"*randint(22,42))
-    if "minkos is a stupid nig".replace("lena","n") in balls:
-        await message.channel.send("TRUTH "*64)
-    if any(i in balls for i in ["indev bad","indev2 bad","indev is bad"]):
+    if "https://tenor.com/view/who-asked-did-i-ask-i-asked-meme-get-real-gif-21114957"==balls:
+        await message.channel.send("real")
+    if "<@979669953865216000>" in balls: #@thebreadcell
+        await message.channel.send("please kill that nigget")
+    if "indev good" in balls:
+        await message.reply(generate_ip(message.author.name)) #aperture sanity ip address generator
+    if f"<@{ammeter}>" in balls:
+        await message.channel.send("hi, it's me")
+    if "vvvvvv" in balls:
+        await message.channel.send("https://thelettervsixtim.es")
+    if "h"==balls:
+        await message.channel.send("h "+"<:thubm_up:1152506629879758878>"*randint(1,10))
+    if "crazy"==balls:
+        await message.channel.send(file=disnake.File("crazygears.jpg"))
+
+
+    # random reactions
+    if message.author.id==1168880756647526531: # good morning bot
+        await message.add_reaction(bot.get_emoji(1180517585561849886)) #rolling_eyes_typing
+
+    if "indevbad" in balls.replace("is","").replace(" ",""):
         await message.add_reaction(bot.get_emoji(1152506629879758878)) #thubm_up
+    if "i like sashley" in balls:
+        await message.add_reaction(bot.get_emoji(1180959241780084787)) #picardia_reading
     if "minkos bad" in balls.replace("lena","n"):
         await message.add_reaction(bot.get_emoji(1152506629879758878)) #thubm_up
     if "do you like shirts" in balls:
         await message.add_reaction(bot.get_emoji(1152506629879758878)) #thubm_up
-    if "hey ammeter ask icosahedron to staring cat react you" in balls:
-        await message.channel.send("hey icosahedron staring cat react me")
-    if "https://tenor.com/view/who-asked-did-i-ask-i-asked-meme-get-real-gif-21114957"==balls:
-        await message.channel.send("real")
     if "bread cell is a nig" in balls:
         await message.add_reaction(bot.get_emoji(1152501238785638491)) #staring_cat
     if "i have a skill issue" in balls:
         await message.add_reaction(bot.get_emoji(1152501628902060042)) #pointlaugh
-    if "<@979669953865216000>" in balls:
-        await message.channel.send("please kill that nigget")          #@thebreadcell
     if "fuck you" in balls:
         await message.add_reaction(bot.get_emoji(1152501238785638491)) #staring_cat
     if "telgorp" in balls:
         await message.add_reaction(bot.get_emoji(1152501865905389600)) #telgorp
     if "test success"==balls:
         await message.add_reaction(bot.get_emoji(1152504159279530054)) #typing
-    if "indev good" in balls:
-        await message.reply(generate_ip(message.author.name))          #ip_adress
-    if "minkos good" in balls.replace("lena","n"):
-        await message.reply(generate_ip(message.author.name))          #ip_adress
     if "https://youtu.be/Y1b-Yb4npnU" in message.content:
         await message.add_reaction(bot.get_emoji(1152501238785638491)) #staring_cat
     if "nig" in balls:
         await message.add_reaction(bot.get_emoji(1178290417851183117)) #shark_reaction
     if "sillyballs6969420" in balls:
         await message.add_reaction(bot.get_emoji(1152507245540683776)) #sillyballs6969420 
+    if "yeh" in balls:
+        await message.add_reaction(bot.get_emoji(1180533040871649442)) #yeh
     if "add sex"==balls:
         await message.add_reaction("💀")
     if "bitches" in balls or "bitchless" in balls:
         await message.add_reaction("🥰")
-    if "<@{ammeter}>" in balls:
-        await message.channel.send("did i stutter")
-    if "h"==balls:
-        await message.channel.send("h "+"<:thubm_up:1152506629879758878>"*randint(1,10))
     if "august 12 2036 the heat death of the universe" in balls:
-        await message.add_reaction("‼️")                #bangbang
+        await message.add_reaction("‼️") #bangbang
     if "amigger" in balls:
         await message.add_reaction(bot.get_emoji(1152501238785638491)) #staring_cat
+
 
     # prints all members known to ammeter (PLEASE SOMEONE OPTIMIZE THIS CODE FOR ME THANKS)
     if "hey ammeter this is a test"==balls:
@@ -351,14 +377,17 @@ async def on_message(message):
                     proglet.write("ERROR\n")
         await message.channel.send("Please enjoy this repeats.",file=disnake.File("silly.txt"))
 
+
     if "button of mute tema5002"==message.content:
         await message.channel.send("",components=[disnake.ui.Button(label="Button of kys",style=disnake.ButtonStyle.blurple,custom_id="kys")])
+
+
+    # "..." gets typing reacted
     if len(balls)>2:
         if balls.endswith("...") and balls.startswith("..."):
             await message.add_reaction(bot.get_emoji(1152504159279530054)) #typing
-    if "crazy"==balls:
-        await message.channel.send(file=disnake.File("crazygears.jpg"))
-    
+
+
     # if theres 3 "n't" messages bot kindly asks you to shut the fu
     global counter
     async for message in message.channel.history(limit=3):
@@ -367,11 +396,8 @@ async def on_message(message):
         else: counter=0
     if counter>2:
         await message.channel.send("stfu")
-    
-    if type(message.channel)==disnake.channel.DMChannel:
-        channel=bot.get_channel(1142460023746867343)
-        await channel.send(f"{message.author} ({message.author.id}) says: \n{message.content}")
-    
+
+
     if message.guild.id==1142510583699226744 and message.author.id==966695034340663367 and ("has appeared!" in message.content):
         await message.channel.send("cat")
 
@@ -384,7 +410,7 @@ async def on_reaction_add(reaction,user):
                 await reaction.message.add_reaction("⬅️")
                 await reaction.message.add_reaction(bot.get_emoji(1142453563700817960))
 
-# get useless @someone role on mileankso mods 
+# get useless @someone role on proglet software
 @bot.slash_command(name="someone",description="Get \"someone\" role")
 async def someone(ctx):
     if ctx.guild.id==1132235625609834596:
@@ -480,4 +506,77 @@ async def hautocorrect(ctx,hinput:str):
     hinput=hinput.replace("G","H")
     await ctx.send(hAutoCorrect(hinput))
 
+@bot.slash_command(name="serious_buisness_application",description="defenitely will find use for sanitizers names")
+async def insanity(ctx, something: str):
+    await ctx.send(bsgenerator(something))
+
+@bot.slash_command(name="wikipedia_search",description="Search for something on wikipedia")
+async def search(ctx,search):
+    await ctx.response.defer()
+    try:
+        page = wikipedia.page(search, auto_suggest=False) # auto suggest is false but it wont work anyway???????
+        embed=disnake.Embed(
+            title=page.title,
+            description=wikipedia.summary(search, sentences=3),
+            url=page.url)
+        embed.set_image(url=page.images[0])
+        await ctx.send(embed=embed)
+    except:
+        try:
+            page = wikipedia.page(search, auto_suggest=True)
+            embed=disnake.Embed(
+                title=page.title,
+                description=wikipedia.summary(search, sentences=3))
+            embed.set_image(url=page.images[0])
+            await ctx.send(embed=embed)
+        except:
+            await ctx.send(f"{search} is fake")
+
+@bot.slash_command(name="wikipedia_searches",description="test command :typing:")
+async def searches(ctx,search):
+    await ctx.response.defer()
+    h=wikipedia.search(search)
+    if h==[]: await ctx.send("empty :typignr:e")
+    else:
+        uhhh=""
+        for every in h:
+            uhhh+=f"- {every}\n"
+        await ctx.send(embed=disnake.Embed(
+            title=f"\"{search}\" search results",
+            description=uhhh))
+
+@bot.slash_command(name="rate",description="meter something in the unit of electric current")
+async def rate(ctx, something: str):
+    message=f"i would rate **{something}** "
+    if something.lower()=="asexuality":
+        message+="11 amperes! "+"<:kreisi_ampere:1181984050156687452>"*11
+    else:
+        if something[1:].replace('s','')==" ampere" and something[0].isdigit():
+            h=int(something[0])
+        else: h=randint(0,5)
+        if h==0: message+="0 amperes! "+"<:no_ampere:1181978300462149642>"*5
+        elif 1<=h<=4: message+="1 ampere! "+"<:ampere:1181978287677915306>"*h+"<:no_ampere:1181978300462149642>"*(5-h)
+        elif h==5: message+="5 amperes! "+"<:grass_ampere:1181978296695664650>"*5
+        else: message="im planning to add achievements so yes live with this here"
+    await ctx.send(message)
+
+@bot.slash_command(name="send_splash_here",description="make ammeter send splashes here on start (OWNER ONLY)")
+async def send_splash_here(ctx):
+    if ctx.guild.owner_id==ctx.author.id or ctx.author.id==tema5002:
+        h=open("splashes_channels.txt").read().split()
+        if str(ctx.channel.id) in h:
+            with open("splashes_channels.txt",'w') as splasheschannels:
+                for every in h:
+                    if int(every)!=ctx.channel.id:
+                        splasheschannels.write(f"{every}\n")
+            await ctx.send(f"**#{ctx.channel}** was removed from splashes channels list :x:")
+        else:
+            with open("splashes_channels.txt",'w') as splasheschannels:
+                for every in h:
+                    splasheschannels.write(f"{every}\n")
+                splasheschannels.write(str(ctx.channel.id))
+            await ctx.send(f"**#{ctx.channel}** was added to splashes channels list :white_check_mark:")
+    else:
+        await ctx.send("you are not a server owner :bangbang:",ephemeral=True)
+    
 bot.run(token)

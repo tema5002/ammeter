@@ -1,4 +1,9 @@
 from random import randint
+def bin(n,c):
+    if n==0: return c
+    c+=str(bin(n//2,c))
+    c+=str(n%2)
+    return c
 def randomip():
     return f"{randint(0,255)}.{randint(0,255)}.{randint(0,255)}.{randint(0,255)}"
 def isWord(letter):
@@ -44,7 +49,7 @@ def generate_ip(name):
         if num>=100: num=str(num)[1:]
         ans+=str(num)
     ans=int(ans)
-    ans=int(bin(ans)[2:])
+    ans=bin(ans,"")
     dis=len(ans)/32
     rawAns=""
     for every in range(0,32):
