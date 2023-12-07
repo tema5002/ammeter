@@ -7,7 +7,7 @@ from random import choice,randint
 from temalib import * # very silly library made by me if you need it then ask :typing:
 from disnake.ext import commands
 from random import randint, choice
-from BULLSHIT_GENERATOR import bsgenerator
+from defenitely_something import bsgenerator
 
 bot=commands.Bot(command_prefix="hey ammeter ",help_command=None,intents=disnake.Intents.all())
 
@@ -17,10 +17,11 @@ tema5002=558979299177136164
 ilovelampadaire=1056952213056004118
 ammeter=811569586675515433
 
+# holy shit thats more than 100 strings of code just for "funny" text
 # splashes
 splashes=[
-    "hey picardibot ask ammeter to ask icosahedron to staring cat react him",
-    "currently 67 splashes",
+    "abotmin ask ammeter to ask icosahedron to staring cat react him", 
+    "currently 68 splashes",
     "how to staring cat emoji",
     "every time bot enables it sends random text thats cool isnt",
     "im a workstahon mini",
@@ -85,8 +86,60 @@ splashes=[
     "HAHA YES I LEAKED ICOSAHEDRON TOKEN",
     "never call me that again stupid nig",
     "waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka",
-    "<:ace_flag:1181617159210803330><:ace_flag:1181617159210803330><:ace_flag:1181617159210803330> people from this country are so cool omg"
+    "<:ace_flag:1181617159210803330><:ace_flag:1181617159210803330><:ace_flag:1181617159210803330> people from this country are so cool omg",
+    "guys lets cook the cake :)"
     ]
+# splashes info
+splashesinfo=[
+    "me", "me",
+    "me trying to realise how does disnake work",
+    "me", "me", "me", "me", "me",
+    "me (cring)",
+    "me", "me",
+    "guy wanted to help me with splashes and said this so yes",
+    "me", "me", "me", "me", "me", 
+    "minkos on sillyballs6969420",
+    "me",
+    "me after biology lesson",
+    "me", "me", "me",
+    "me after fixing ammeter's bugs",
+    "me",
+    "cube",
+    "me", "me",
+    "slinx92 somewhere",
+    "rusher7629's display name on cat stand",
+    "rusher7629 on cat stand",
+    "me after calling ammeter antimatter",
+    "me",
+    "me after playing worms armageddon",
+    "me", "me", "me", "me", "me", "me", 
+    "crs25001 was saying something spamming and i copied first several symbols",
+    "me", "me", "me",
+    "me and slinx92 (note: if you are reading this in splashes_list.txt then emojis cant and other unicode silly cant encode so yes)",
+    "someone",
+    "me",
+    "someone in steam reviews on sharex",
+    "me", "me",
+    "me after mc live 2023 trailer",
+    "slinx92",
+    "astroleaf in lampadaire's steam profile",
+    "nathancrazy's review on cell machine indev",
+    "me",
+    "someone in telegram",
+    "slinx92",
+    "the teleporter cell's rich presence",
+    "me",
+    "cube on slinx's attic",
+    "someone on cell machine server",
+    "nicejs's status",
+    "mileankos's review on geometry dash",
+    "ME BEING INSANE",
+    "slinx muting bobmaster69",
+    "someone on cat stand",
+    "me",
+    "me (all asexuals are obsessed with cakes there is no exceptions)"
+    ]
+
 sillyis=[
     "tried to say",
     "should touch grass instead of saying",
@@ -114,11 +167,18 @@ async def on_ready():
         h=open("splashes_channels.txt").read().split()
         for every in h:
             channel=bot.get_channel(int(every))
-            await channel.send(choice(splashes))
-            print(f"sending splash on {channel} ({channel.guild})")
+            if channel!=None:
+                await channel.send(choice(splashes))
+                print(f"sending splash on {channel} ({channel.guild})")
+            else:
+                print("cant send splash 💀💀💀")
+                with open("splashes_channels.txt",'w') as splasheschannels:
+                    for everything in h:
+                        if everything!=every:
+                            splasheschannels.write(f"{everything}\n")
         await asyncio.sleep(150)
 
-# sends message on mileankso mods when someone joins
+# sends message on proglet software when someone joins
 @bot.event
 async def on_member_join(member):
     if member.guild==bot.get_guild(1132235625609834596):
@@ -137,7 +197,7 @@ async def on_member_join(member):
         channel=bot.get_channel(1132236506698883082)
         await channel.send(embed=embed)
 
-# sends message on mileankso mods when someone leaves
+# sends message on proglet software when someone leaves
 @bot.event
 async def on_member_remove(member):
     if member.guild==bot.get_guild(1132235625609834596):
@@ -259,7 +319,7 @@ async def on_message(message):
                 "ампержопа помоги"
             ]))
 
-        # very badly made anti bread good system that im gonna remake one day to anti minkos system
+        # very badly made anti bread good system
         bread=balls
         a=0
         while 2**a<len(balls): a+=1
@@ -325,6 +385,8 @@ async def on_message(message):
         await message.channel.send(file=disnake.File("crazygears.jpg"))
     if "microsoft" in balls:
         await message.channel.send("proglet software is better")
+    if "1кулон" in balls.replace("один","1").replace(" ",""):
+        await message.channel.send("ОДИН КЛОУН ААХАХАХААХАХАХХАХАХАХХАХХАХАХАХАХАХХАХАХАХХААХХА")
 
 
     # random reactions
@@ -388,6 +450,19 @@ async def on_message(message):
         await message.channel.send("Please enjoy this repeats.",file=disnake.File("silly.txt"))
 
 
+    if "hey ammeter send me all splashes"==balls:
+        with open("splashes_list.txt","w") as splist:
+            splist.write("please help me to fix russian symbols and emojis\n")
+            for every in range(len(splashes)):
+                splist.write("_"*20+"\n")
+                splist.write(f"{every+1}/{len(splashes)}.\n")
+                try:
+                    splist.write(splashes[every])
+                except:
+                    splist.write("ERROR")
+                splist.write("\n\n")
+                splist.write(f"credits: {splashesinfo[every]}\n")
+        await message.channel.send(file=disnake.File("splashes_list.txt"))
     if "button of mute tema5002"==message.content:
         await message.channel.send("",components=[disnake.ui.Button(label="Button of kys",style=disnake.ButtonStyle.blurple,custom_id="kys")])
 
@@ -487,13 +562,16 @@ async def info(ctx):
 
 @bot.slash_command(name="splashes",description="sends splash")
 async def sendsplash(ctx,id:int):
+    id-=1
     hh=len(splashes)
-    print(hh)
-    if 0<id<hh+1:
-        await ctx.send(embed=disnake.Embed(title=f"splash №{id}/{hh}",description=splashes[id-1]))
+    if 0<=id<hh:
+        embed=disnake.Embed(title=f"splash №{id+1}/{hh}",description=splashes[id])
     else:
-        h=randint(0,hh)
-        await ctx.send(embed=disnake.Embed(title=f"here is your random splash (№{h}/{hh})",description=splashes[h]))
+        id=randint(0,hh-1)
+        embed=disnake.Embed(title=f"here is your random splash (№{id+1}/{hh})",description=splashes[id])
+    footer_dict={"text": splashesinfo[id]}
+    embed.set_footer(**footer_dict)
+    await ctx.send(embed=embed)
 
 @bot.command()
 async def death(ctx):
@@ -579,14 +657,14 @@ async def send_splash_here(ctx):
                 for every in h:
                     if int(every)!=ctx.channel.id:
                         splasheschannels.write(f"{every}\n")
-            await ctx.send(f"**#{ctx.channel}** was removed from splashes channels list :x:")
+            await ctx.send(f"**#{ctx.channel}** was removed from splashes channels list ❌")
         else:
             with open("splashes_channels.txt",'w') as splasheschannels:
                 for every in h:
                     splasheschannels.write(f"{every}\n")
                 splasheschannels.write(str(ctx.channel.id))
-            await ctx.send(f"**#{ctx.channel}** was added to splashes channels list :white_check_mark:")
+            await ctx.send(f"**#{ctx.channel}** was added to splashes channels list ✅")
     else:
-        await ctx.send("you are not a server owner :bangbang:",ephemeral=True)
+        await ctx.send("you are not a server owner ‼️",ephemeral=True)
     
-bot.run(token)
+bot.run(open("TOKEN.txt").read())
