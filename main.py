@@ -87,7 +87,8 @@ splashes=[
     "never call me that again stupid nig",
     "waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka",
     "<:ace_flag:1181617159210803330><:ace_flag:1181617159210803330><:ace_flag:1181617159210803330> people from this country are so cool omg",
-    "guys lets cook the cake :)"
+    "guys lets cook the cake :)",
+    "@germancountryball ты играеш в GTA 5"
     ]
 # splashes info
 splashesinfo=[
@@ -137,7 +138,8 @@ splashesinfo=[
     "slinx muting bobmaster69",
     "someone on cat stand",
     "me",
-    "me (all asexuals are obsessed with cakes there is no exceptions)"
+    "me (all asexuals are obsessed with cakes there is no exceptions)",
+    "maranw on proglet software"
     ]
 
 sillyis=[
@@ -387,6 +389,8 @@ async def on_message(message):
         await message.channel.send("proglet software is better")
     if "1кулон" in balls.replace("один","1").replace(" ",""):
         await message.channel.send("ОДИН КЛОУН ААХАХАХААХАХАХХАХАХАХХАХХАХАХАХАХАХХАХАХАХХААХХА")
+    if "hey ammeter this is not a test"==balls:
+        await message.channel.send("if this is not a test then why are you asking me this you dum dum")
 
 
     # random reactions
@@ -436,10 +440,11 @@ async def on_message(message):
         nuh=[]
         for every in bot.guilds:
             for everyone in every.members:
-                if everyone.bot:
-                    nuh+=[f"{everyone.name}#{everyone.discriminator} ({everyone.display_name}) BOT"]
-                else:
-                    nuh+=[f"{everyone.name}#{everyone.discriminator} ({everyone.display_name})"]
+                h=everyone.name
+                if everyone.discriminator!=0: h+=f"#{everyone.discriminator}"
+                h+=f" ({everyone.display_name})"
+                if everyone.bot: h+=" BOT"
+                nuh+=[h]
         nuh=sorted(list(set(nuh)))
         with open("silly.txt","w") as proglet:
             for every in nuh:
@@ -509,11 +514,8 @@ async def someone(ctx):
 async def ping(ctx):
     await ctx.response.defer()
     hh=round(bot.latency*1000)
-    if randint(1,10)==1:
-        hh=randint(100000000,1000000000)
-        await ctx.send(f"ammeter is melting tema5002's laptop with {hh}ms ping")
-    elif hh>=100000:
-        await ctx.send(f"would be funny if ammeter will ever reach this ping\n\n{hh}ms ping")
+    if hh>=100000:
+        await ctx.send(f"ammeter suffers with {hh}ms ping")
     elif hh>=10000:
         await ctx.send(f"ammeter has serious dementia level with {hh}ms ping")
     elif hh>=1000:
