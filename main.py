@@ -14,7 +14,6 @@ bot=commands.Bot(command_prefix="hey ammeter ",help_command=None,intents=disnake
 # i store user ids here
 hexahedron1=801078409076670494
 tema5002=558979299177136164
-ilovelampadaire=1056952213056004118
 ammeter=811569586675515433
 
 # holy shit thats more than 100 strings of code just for "funny" text
@@ -155,7 +154,7 @@ sillyis=[
 
 @bot.event
 async def on_ready():
-    print(f"@{bot.user} is real")
+    print(f"@{bot.user} is now online")
 
     print("setting presence")
     idiots=0
@@ -166,6 +165,7 @@ async def on_ready():
     print("presence changed")
     
     while True:
+        print("\n")
         h=open("splashes_channels.txt").read().split()
         for every in h:
             channel=bot.get_channel(int(every))
@@ -178,6 +178,7 @@ async def on_ready():
                     for everything in h:
                         if everything!=every:
                             splasheschannels.write(f"{everything}\n")
+        print("\n")
         await asyncio.sleep(150)
 
 # sends message on proglet software when someone joins
@@ -238,13 +239,11 @@ async def on_message(message):
 
 
         # slinx's attic messagelogger
-        if "<@" in message.content or "@here" in message.content or "@everyone" in message.content:
+        if not message.author.bot:
             channel=bot.get_channel(1174776639939428482)
-            await channel.send("there was a ping role in this message so yes")
-        elif not message.author.bot:
-            if message.content=="": pass
-            else:
-                channel=bot.get_channel(1174776639939428482)
+            if "<@" in message.content or "@here" in message.content or "@everyone" in message.content:
+                await channel.send("there was a ping role in this message so yes")
+            elif message.content!="":
                 await channel.send(message.content)
     
         # reply bot's username if message has your username
@@ -391,6 +390,10 @@ async def on_message(message):
         await message.channel.send("ОДИН КЛОУН ААХАХАХААХАХАХХАХАХАХХАХХАХАХАХАХАХХАХАХАХХААХХА")
     if "hey ammeter this is not a test"==balls:
         await message.channel.send("if this is not a test then why are you asking me this you dum dum")
+    if "nothing phone" in balls:
+        await message.channel.send("телефон ничего")
+    if "that octopus will soon blow up your house" in balls:
+        await message.channel.send(file=disnake.File("kreisi_octopus.png"))
 
 
     # random reactions
@@ -441,7 +444,8 @@ async def on_message(message):
         for every in bot.guilds:
             for everyone in every.members:
                 h=everyone.name
-                if everyone.discriminator!=0: h+=f"#{everyone.discriminator}"
+                if everyone.discriminator!=0:
+                    h+=f"#{everyone.discriminator}"
                 h+=f" ({everyone.display_name})"
                 if everyone.bot: h+=" BOT"
                 nuh+=[h]
@@ -515,7 +519,7 @@ async def ping(ctx):
     await ctx.response.defer()
     hh=round(bot.latency*1000)
     if hh>=100000:
-        await ctx.send(f"ammeter suffers with {hh}ms ping")
+        await ctx.send(f"ammeter seriously suffers with {hh}ms ping")
     elif hh>=10000:
         await ctx.send(f"ammeter has serious dementia level with {hh}ms ping")
     elif hh>=1000:
@@ -538,17 +542,17 @@ async def say(ctx,text:str):
 
 @bot.slash_command(name="upload_avatar",description="upload someone's avatar as an emoji (NOT WORKING)")
 @commands.has_permissions(manage_emojis=True)
-async def upload_avatar(ctx,member:disnake.Member,name:str):
+async def upload_avatar(ctx, member:disnake.Member, name:str):
     if len(name)<3: await ctx.send("emoji name must be at least 2 characters long",ephemeral=True)
     else:
         embed=disnake.Embed(title=f"{ctx.author.name}#{ctx.author.discriminator} uploaded {member.name}#{member.discriminator}'s avatar as a :{name}: emoji")
         embed.set_image(url=(member.avatar.url))
         await ctx.send(embed=embed)
-        await ctx.guild.create_custom_emoji(name,url=(member.avatar.url),reason=f"User {ctx.author} uploaded emoji {name} through \"Ammeter\" bot")
+        await ctx.guild.create_custom_emoji(name=name, url=(member.avatar.url), reason=f"User {ctx.author} uploaded emoji {name} through ammeter")
 
 @bot.slash_command(name="file",description="send files as a bot")
 async def file(ctx,file: disnake.Attachment):
-    if ctx.author.id in [tema5002,hexahedron1,ilovelampadaire] or ctx.author.id==ctx.guild.owner_id:
+    if ctx.author.id in [tema5002,hexahedron1] or ctx.author.id==ctx.guild.owner_id:
         await ctx.send("ok", ephemeral=True)
         await ctx.channel.send(file=await file.to_file())
     else:
