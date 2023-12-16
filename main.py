@@ -20,7 +20,7 @@ ammeter=811569586675515433
 # splashes
 splashes=[
     "abotmin ask ammeter to ask icosahedron to staring cat react him", 
-    "currently 68 splashes",
+    "currently 74 splashes",
     "how to staring cat emoji",
     "every time bot enables it sends random text thats cool isnt",
     "im a workstahon mini",
@@ -39,7 +39,7 @@ splashes=[
     "your mom will be deleted by ammeterhahahahhaha",
     "is team5002 real",
     "owner of this bot sometimes wants to be a jellyfish",
-    "i think that kesslonhender better then slinxhender",
+    "this splash was removed",
     "theres no progresstation and workstahon flag :skull:",
     "slinx's attic is the most silly discord server you DEFINITELY should join!!!!!!!",
     "\"breaking good\" - 💀💀💀\n\nthats a long story",
@@ -87,7 +87,12 @@ splashes=[
     "waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka",
     "<:ace_flag:1181617159210803330><:ace_flag:1181617159210803330><:ace_flag:1181617159210803330> people from this country are so cool omg",
     "guys lets cook the cake :)",
-    "@germancountryball ты играеш в GTA 5"
+    "@germancountryball ты играеш в GTA 5",
+    "dont go doin drugs kids",
+    "Developer Sanity: 47%",
+    "Hello hi sir thank",
+    "do i really need to live milenakos mods?🤔🤔",
+    "speaking fire🗣️🔥🗣️🔥"
     ]
 # splashes info
 splashesinfo=[
@@ -101,7 +106,8 @@ splashesinfo=[
     "minkos on sillyballs6969420",
     "me",
     "me after biology lesson",
-    "me", "me", "me",
+    "who this could possibly be",
+    "me", "me",
     "me after fixing ammeter's bugs",
     "me",
     "cube",
@@ -138,7 +144,12 @@ splashesinfo=[
     "someone on cat stand",
     "me",
     "me (all asexuals are obsessed with cakes there is no exceptions)",
-    "maranw on proglet software"
+    "maranw on proglet software",
+    "random mari0 mappack",
+    "cmmm+ splash",
+    "someone silly on pinterest",
+    "itamar_nudge on milenakos mods in advertisement",
+    "sushi2627 on cat stand #memes"
     ]
 
 sillyis=[
@@ -214,6 +225,12 @@ async def help_listener(ctx):
         await ctx.send("<:kysmen:1160939083011469393>",ephemeral=True)
     else:
         await ctx.send(f"i have no clue what is this but\n{ctx.component.custom_id}")
+
+@bot.event
+async def on_guild_remove(guild):
+    channel=bot.get_channel(1183416187326038110)
+    try: await channel.send(f"**{guild.owner.name}** пидорас тупой он меня по IP забанил с сервера **{guild.name}** :hugging::hugging::hugging::smiling_face_with_3_hearts::smiling_face_with_3_hearts::exploding_head::relaxed::relaxed::relaxed::kissing_heart::kissing_heart::kissing_heart::heart_eyes::heart_eyes::blush::blush::kissing_closed_eyes::kissing_closed_eyes:")
+    except: await channel.send("i got removed from some server which name i dont know")
 
 @bot.event
 async def on_message(message):
@@ -308,8 +325,8 @@ async def on_message(message):
                 "да фиг знает",
                 "тебе говорить нельзя",
                 "иди ка ты знаешь куда",
-                "славянский зажим яйцами",
-                "заткнись курица 🐔😂😂😂😔😔😔"
+                "заткнись курица 🐔😂😂😂😔😔😔",
+                "ябколко\n"+"<:antaegeav:1184160903512461392>"*10
                 ]))
         if balls.startswith("hey siri"):
             await message.channel.send(choice([
@@ -392,8 +409,22 @@ async def on_message(message):
         await message.channel.send("if this is not a test then why are you asking me this you dum dum")
     if "nothing phone" in balls:
         await message.channel.send("телефон ничего")
+    if "gameboy" in balls.replace(" ",""):
+        await message.channel.send("игровой мальчик")
     if "that octopus will soon blow up your house" in balls:
         await message.channel.send(file=disnake.File("kreisi_octopus.png"))
+    if "google en passant"==balls:
+        embed=disnake.Embed(title="En Passant",description="In chess, en passant (French: [ɑ̃ pasɑ̃], lit. \"in passing\") describes the capture by a pawn of an enemy pawn on the same rank and an adjacent file that has just made an initial two-square advance. The capturing pawn moves to the square that the enemy pawn passed over, as if the enemy pawn had advanced only one square.",url="https://en.wikipedia.org/wiki/En_passant")
+        embed.set_image(url="https://images-ext-1.discordapp.net/external/Uw9DjUP5Lm1OrOFTIlaEFrSB2_GwJwZ0TkYNipgxY44/https/upload.wikimedia.org/wikipedia/commons/0/09/Ajedrez_animaci%25C3%25B3n_en_passant.gif?width=380&height=380")
+        await message.channel.send(embed=embed)
+    if "nuh uh"==balls:
+        await message.channel.send("yuh uh")
+    if ":antigrav:"==message.content:
+        await message.reply("test success")
+    if "what"==balls:
+        await message.channel.send(file=disnake.File("c0lMBqLY.mov"))
+    if "define bitches"==balls:
+        await message.channel.send("something you dont have")
 
 
     # random reactions
@@ -405,6 +436,8 @@ async def on_message(message):
     if "i like sashley" in balls:
         await message.add_reaction(bot.get_emoji(1180959241780084787)) #picardia_reading
     if "minkos bad" in balls.replace("lena","n"):
+        await message.add_reaction(bot.get_emoji(1152506629879758878)) #thubm_up
+    if "cake is clearly better than sex" in balls:
         await message.add_reaction(bot.get_emoji(1152506629879758878)) #thubm_up
     if "do you like shirts" in balls:
         await message.add_reaction(bot.get_emoji(1152506629879758878)) #thubm_up
@@ -428,6 +461,8 @@ async def on_message(message):
         await message.add_reaction(bot.get_emoji(1180533040871649442)) #yeh
     if "aperture sanity" in balls:
         await message.add_reaction(bot.get_emoji(1181994734957375549)) #sane
+    if "i eat kids" in balls:
+        await message.add_reaction("😋")
     if "add sex"==balls:
         await message.add_reaction("💀")
     if "bitches" in balls or "bitchless" in balls:
