@@ -46,7 +46,7 @@ splashes=[
     "you're*",
     "jsab stands for **j**ust ||**s**illy **a**ss **b**alls||",
     "lets drink to the health of indie developers!!!!",
-    "```py\nchannel=bot.get_channel(1132240686675136562)\nawait channel.send(choice(splashes))```",
+    '```py\nwhile True:\n    print("\n")\n    h=open("splashes_channels.txt").read().split()\n    for every in h:\n        channel=bot.get_channel(int(every))\n        if channel!=None:\n            await channel.send(choice(splashes))\n            print(f"sending splash on {channel} ({channel.guild})")\n        else:\n            print("cant send splash 💀💀💀")\n            with open("splashes_channels.txt","w") as splasheschannels:\n                for everything in h:\n                    if everything!=every:\n                        splasheschannels.write(f"{everything}\n")\n    print("\n")\n    await asyncio.sleep(150)```',
     "workstindows 11 professional",
     "🧊",
     "RUSHING DEEZ CATS",
@@ -236,33 +236,24 @@ async def on_guild_remove(guild):
 async def on_message(message):
     await bot.process_commands(message)
     balls=message.content.lower()
-    if "asexuality is not real" in balls.replace("`",""):
+    if "asexuality is not real" in balls.replace("are","is"):
         await message.reply("amigger and his family 😂😂😀")
         try:
-            await message.guild.timeout(message.author, duration=60, reason="who asked")
+            await message.guild.timeout(message.author, duration=3600, reason="who asked")
         except: pass
+    if "asexuality is real" in balls.replace("`",""):
+        await message.reply(file=disnake.File("kysNOW.jpg"))
 
     if message.author.id!=ammeter:
-        #shat ap
-        if randint(1,3)==1:
-            if balls=="insanity" or balls=="nuh uh" or "сарказм" in balls:
-                h=open("not_shat_ap_servers.txt").read().split() # does not shat aps you if your server in this file
-                if not str(message.guild.id) in h:
-                    try:
-                        await message.guild.timeout(message.author, duration=60, reason="being silly")
-                        await message.reply("заткнись курица 🐔🐔🐥👿👿🤓‼️")
-                    except:
-                        await message.reply("403 not allowed")
-
 
         # slinx's attic messagelogger
         if not message.author.bot:
             channel=bot.get_channel(1174776639939428482)
-            if "<@" in message.content or "@here" in message.content or "@everyone" in message.content:
-                await channel.send("there was a ping role in this message so yes")
+            if any(_ in message.content for _ in ["<@", "@here", "@everyone", "битбокс баттл с аботмином"]):
+                await channel.send("my creator dont allows me to send this")
             elif message.content!="":
                 await channel.send(message.content)
-    
+
         # reply bot's username if message has your username
         if message.author.display_name==message.content:
             await message.channel.send(message.guild.get_member(ammeter).display_name)
@@ -561,10 +552,6 @@ async def ping(ctx):
         await ctx.send(f"ammeter has dementia with {hh}ms ping")
     else:
         await ctx.send(f"ammeter is melting tema5002's laptop with {hh}ms ping")
-    idiots=0
-    for every in bot.guilds:
-        idiots+=every.member_count
-    await bot.change_presence(status=disnake.Status.online,activity=disnake.Game(f"with {idiots} idiots on {len(bot.guilds)} servers"))
 
 @bot.slash_command(name="say",description="talk as a bot")
 async def say(ctx,text:str):
@@ -597,9 +584,22 @@ async def file(ctx,file: disnake.Attachment):
 async def info(ctx):
     embed=disnake.Embed(title="Ammeter",color=0x00FFFF,description=
         f"very bad bot made by tema5002\n\nthanks to \n**slinx92**\n**thebreadcell** (dont ask)\n\n"+
-        f"{len(splashes)} splashes currently\n"+
         "join [mileankso mods](https://discord.gg/WCTzD3YQEk) or i will do uhhhh idk")
     await ctx.send(embed=embed)
+
+@bot.slash_command(name="stats",description="stats")
+async def stats(ctx):
+    idiots=0
+    record=0
+    for every in bot.guilds:
+        idiots+=every.member_count
+        if every.member_count>record:
+            h=every.name
+            record=every.member_count
+    embed=disnake.Embed(title="amigger stats",color=0x00FFFF,description=
+        f"{len(bot.guilds)} servers and {idiots} servers"+
+        f"{len(splashes)} splashes currently\n"+
+        f"biggest server is **{h}** with **{record}** members")
 
 @bot.slash_command(name="splashes",description="sends splash")
 async def sendsplash(ctx,id:int):
