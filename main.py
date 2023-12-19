@@ -20,7 +20,7 @@ ammeter=811569586675515433
 # splashes
 splashes=[
     "abotmin ask ammeter to ask icosahedron to staring cat react him", 
-    "currently 74 splashes",
+    "currently 75 splashes",
     "how to staring cat emoji",
     "every time bot enables it sends random text thats cool isnt",
     "im a workstahon mini",
@@ -92,7 +92,8 @@ splashes=[
     "Developer Sanity: 47%",
     "Hello hi sir thank",
     "do i really need to live milenakos mods?🤔🤔",
-    "speaking fire🗣️🔥🗣️🔥"
+    "speaking fire🗣️🔥🗣️🔥",
+    "люди гта 6 вийдет на консось нових поколеня"
     ]
 # splashes info
 splashesinfo=[
@@ -149,7 +150,8 @@ splashesinfo=[
     "cmmm+ splash",
     "someone silly on pinterest",
     "itamar_nudge on milenakos mods in advertisement",
-    "sushi2627 on cat stand #memes"
+    "sushi2627 on cat stand #memes",
+    "this video description: https://youtu.be/lM_qJsAvujg"
     ]
 
 sillyis=[
