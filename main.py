@@ -46,7 +46,7 @@ splashes=[
     "you're*",
     "jsab stands for **j**ust ||**s**illy **a**ss **b**alls||",
     "lets drink to the health of indie developers!!!!",
-    '```py\nwhile True:\n    print("\n")\n    h=open("splashes_channels.txt").read().split()\n    for every in h:\n        channel=bot.get_channel(int(every))\n        if channel!=None:\n            await channel.send(choice(splashes))\n            print(f"sending splash on {channel} ({channel.guild})")\n        else:\n            print("cant send splash 💀💀💀")\n            with open("splashes_channels.txt","w") as splasheschannels:\n                for everything in h:\n                    if everything!=every:\n                        splasheschannels.write(f"{everything}\n")\n    print("\n")\n    await asyncio.sleep(150)```',
+    '```py\nwhile True:\n    print("\\n")\n    h=open("splashes_channels.txt").read().split()\n    for every in h:\n        channel=bot.get_channel(int(every))\n        if channel!=None:\n            await channel.send(choice(splashes))\n            print(f"sending splash on {channel} ({channel.guild})")\n        else:\n            print("cant send splash 💀💀💀")\n            with open("splashes_channels.txt","w") as splasheschannels:\n                for everything in h:\n                    if everything!=every:\n                        splasheschannels.write(f"{everything}\\n")\n    print("\\n")\n    await asyncio.sleep(150)```',
     "workstindows 11 professional",
     "🧊",
     "RUSHING DEEZ CATS",
@@ -122,7 +122,7 @@ splashesinfo=[
     "me", "me", "me", "me", "me", "me", 
     "crs25001 was saying something spamming and i copied first several symbols",
     "me", "me", "me",
-    "me and slinx92 (note: if you are reading this in splashes_list.txt then emojis cant and other unicode silly cant encode so yes)",
+    "me and slinx92",
     "someone",
     "me",
     "someone in steam reviews on sharex",
@@ -478,7 +478,7 @@ async def on_message(message):
                 if everyone.bot: h+=" BOT"
                 nuh+=[h]
         nuh=sorted(list(set(nuh)))
-        with open("silly.txt","w") as proglet:
+        with editfile("silly.txt") as proglet:
             for every in nuh:
                 try:
                     proglet.write(every+"\n")
@@ -488,10 +488,8 @@ async def on_message(message):
 
 
     if "hey ammeter send me all splashes"==balls:
-        with open("splashes_list.txt","w") as splist:
-            splist.write("please help me to fix russian symbols and emojis\n")
+        with editfile("splashes_list.txt") as splist:
             for every in range(len(splashes)):
-                splist.write("_"*20+"\n")
                 splist.write(f"{every+1}/{len(splashes)}.\n")
                 try:
                     splist.write(splashes[every])
@@ -499,6 +497,7 @@ async def on_message(message):
                     splist.write("ERROR")
                 splist.write("\n\n")
                 splist.write(f"credits: {splashesinfo[every]}\n")
+                splist.write("_"*20+"\n")
         await message.channel.send(file=disnake.File("splashes_list.txt"))
     if "button of mute tema5002"==message.content:
         await message.channel.send("",components=[disnake.ui.Button(label="Button of kys",style=disnake.ButtonStyle.blurple,custom_id="kys")])

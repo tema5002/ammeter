@@ -1,11 +1,21 @@
 from random import randint
+import codecs
+
+def openfile(file):
+    return codecs.open(file, encoding="utf-8")
+
+def editfile(file):
+    return codecs.open(file, "w", encoding="utf-8")
+
 def bin(n,c):
     if n==0: return c
     c+=str(bin(n//2,c))
     c+=str(n%2)
     return c
+
 def randomip():
     return f"{randint(0,255)}.{randint(0,255)}.{randint(0,255)}.{randint(0,255)}"
+
 def isWord(letter):
     bool=""
     for number in range(len(letter)):
@@ -16,11 +26,13 @@ def isWord(letter):
             if every=="z": bool+="f"
     if bool.find("f")>0: return False
     else: return True
+
 def isLetter(letter):
     for every in "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюяABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz":
         if letter==every: return True
         if letter==every: break
         if every=="z": return False
+
 def hAutoCorrect(hInput):
     hAutoCorrected=""
     up=True
@@ -33,6 +45,7 @@ def hAutoCorrect(hInput):
             hAutoCorrected+=hInputFor
             up=True
     return hAutoCorrected
+
 def generate_ip(name):
     def numip(n):
         ip=""
