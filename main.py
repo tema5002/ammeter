@@ -20,7 +20,7 @@ ammeter=811569586675515433
 # splashes
 splashes=[
     "abotmin ask ammeter to ask icosahedron to staring cat react him", 
-    "currently 75 splashes",
+    "currently 76 splashes",
     "how to staring cat emoji",
     "every time bot enables it sends random text thats cool isnt",
     "im a workstahon mini",
@@ -93,7 +93,8 @@ splashes=[
     "Hello hi sir thank",
     "do i really need to live milenakos mods?🤔🤔",
     "speaking fire🗣️🔥🗣️🔥",
-    "люди гта 6 вийдет на консось нових поколеня"
+    "люди гта 6 вийдет на консось нових поколеня",
+    "<:fruit:1187076240612540588><a:arrow:1187076103353925684>"
     ]
 # splashes info
 splashesinfo=[
@@ -151,7 +152,8 @@ splashesinfo=[
     "someone silly on pinterest",
     "itamar_nudge on milenakos mods in advertisement",
     "sushi2627 on cat stand #memes",
-    "this video description: https://youtu.be/lM_qJsAvujg"
+    "this video description: https://youtu.be/lM_qJsAvujg",
+    "me"
     ]
 
 sillyis=[
@@ -245,6 +247,12 @@ async def on_message(message):
         except: pass
     if "asexuality is real" in balls.replace("`",""):
         await message.reply(file=disnake.File("kysNOW.jpg"))
+
+    if message.author.id==553093932012011520:
+        await message.reply("заткнись курица😤shut up chicken😡πи$daчек прикрыла😋 (я абослют😈)🙀зткнс крца🤐зоткися курапаточка🙄💅З А Т К Н И С Ь🤫К У Р Е Ц А🐓")
+        try:
+            await message.guild.timeout(message.author, duration=86400, reason="who asked")
+        except: pass
 
     if message.author.id!=ammeter:
 
@@ -414,8 +422,6 @@ async def on_message(message):
         await message.channel.send("yuh uh")
     if ":antigrav:"==message.content:
         await message.reply("test success")
-    if "what"==balls:
-        await message.channel.send(file=disnake.File("c0lMBqLY.mov"))
     if "define bitches"==balls:
         await message.channel.send("something you dont have")
 
