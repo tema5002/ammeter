@@ -3,6 +3,8 @@
 import disnake
 import wikipedia
 import asyncio
+import math
+import datetime
 from random import choice,randint
 from temalib import * # very silly library made by me if you need it then ask :typing:
 from disnake.ext import commands
@@ -15,6 +17,28 @@ bot=commands.Bot(command_prefix="hey ammeter ",help_command=None,intents=disnake
 hexahedron1=801078409076670494
 tema5002=558979299177136164
 ammeter=811569586675515433
+
+def makeembed(page, list):
+    pages = math.ceil(len(list)/10)
+    uhhh=""
+    if page == pages:
+        for every in list[10*(page-1):]:
+            uhhh+=f"- {every}\n"
+    else:
+        for every in list[10*(page-1):10*(page-1)+10]:
+            uhhh+=f"- {every}\n"
+    return disnake.Embed(title=f"Page {page}/{pages}", description=uhhh)
+
+def makecomponents(uhh):
+    if uhh != None:
+        components = []
+        h = int(uhh[5:uhh.find("/")])
+        g = int(uhh[uhh.find("/") + 1:])
+        if h != 1:
+            components+=[disnake.ui.Button(label="<", style=disnake.ButtonStyle.secondary, custom_id=str(h-1))]
+        if h != g:
+            components+=[disnake.ui.Button(label=">", style=disnake.ButtonStyle.secondary, custom_id=str(h+1))]
+        return components
 
 # holy shit thats more than 100 strings of code just for "funny" text
 # splashes
@@ -222,13 +246,15 @@ async def on_member_remove(member):
         channel=bot.get_channel(1132236506698883082)
         await channel.send(member.mention +" gone <:picardia_dead:1132754518237532260>")
 
-# button of mute tema5002 listener
+# button of mute tema5002 + save files listener
 @bot.listen("on_button_click")
 async def help_listener(ctx):
     if ctx.component.custom_id=="kys":
-        await ctx.send("<:kysmen:1160939083011469393>",ephemeral=True)
+        await ctx.send("<:kysmen:1160939083011469393>", ephemeral=True)
     else:
-        await ctx.send(f"i have no clue what is this but\n{ctx.component.custom_id}")
+        h = ctx.component.custom_id
+        embed=makeembed(int(h), os.listdir("shitpost"))
+        await ctx.response.edit_message(embed=embed, components=makecomponents(embed.title))
 
 @bot.event
 async def on_guild_remove(guild):
@@ -273,31 +299,33 @@ async def on_message(message):
             else:
                 await message.channel.send(message.author.display_name.replace("octopus",":octopus:").replace("Octopus",":octopus:"))
 
+        # THOSE WILL BE A FUNCTION ONE DAY
         # @everyo on proglet software
-        if "<@&1146827011403284601>" in balls:
-            h=True
-            for every in message.author.roles:
-                if every.id==1146827011403284601: h=False
-            if h:
-                try:
-                    role=disnake.utils.get(message.guild.roles,name="everyo")
-                    await message.author.add_roles(role)
-                    await message.channel.send("Congratulations with your new <@&1146827011403284601> role!")
-                except:
-                    await message.channel.send("for some reason i cant give you that role what the hell man")
+        if f"<@&1146827011403284601>" in balls and not any(_.id==1146827011403284601 for _ in message.author.roles):
+            try:
+                role=disnake.utils.get(message.guild.roles, name="everyo")
+                await message.author.add_roles(role)
+                await message.channel.send("Congratulations with your new <@&1146827011403284601> role!")
+            except:
+                await message.channel.send("for some reason i cant give you that role what the hell man")
 
         # @evreyeon on ctqa stnad
-        if "<@&1178336783914770442>" in balls:
-            h=True
-            for every in message.author.roles:
-                if every.id==1146827011403284601: h=False
-            if h:
-                try:
-                    role=disnake.utils.get(message.guild.roles,name="evreyeon")
-                    await message.author.add_roles(role)
-                    await message.channel.send("Congratulations with your new <@&1178336783914770442> role!")
-                except:
-                    await message.channel.send("for some reason i cant give you that role what the hell man")
+        if f"<@&1178336783914770442>" in balls and not any(_.id==1178336783914770442 for _ in message.author.roles):
+            try:
+                role=disnake.utils.get(message.guild.roles, name="evreyeon")
+                await message.author.add_roles(role)
+                await message.channel.send("Congratulations with your new <@&1178336783914770442> role!")
+            except:
+                await message.channel.send("for some reason i cant give you that role what the hell man")
+
+        # @eyvriyon on a silly server
+        if f"<@&1187758992689209495>" in balls and not any(_.id==1187758992689209495 for _ in message.author.roles):
+            try:
+                role=disnake.utils.get(message.guild.roles, name="eyvriyon")
+                await message.author.add_roles(role)
+                await message.channel.send("Congratulations with your new <@&1187758992689209495> role!")
+            except:
+                await message.channel.send("for some reason i cant give you that role what the hell man")
 
         # replies :x+1 to :x messages
         if len(balls)>1 and balls[0]==":" and balls[1:].isdigit():
@@ -714,5 +742,86 @@ async def send_splash_here(ctx):
             await ctx.send(f"**#{ctx.channel}** was added to splashes channels list ✅")
     else:
         await ctx.send("you are not a server owner ‼️",ephemeral=True)
-    
+
+@bot.slash_command(name="file_data", description="Returns information about an attached file")
+async def file_data_handler(ctx, file: disnake.Attachment):
+
+    embed = disnake.Embed(title="File Data", color=0x00FF00)
+
+    filename = file.filename
+    size = file.size
+    url = file.url
+    content_type = file.content_type
+    duration = file.duration
+    waveform = file.waveform
+
+    embed.add_field(name="Filename",       value=filename)
+    embed.add_field(name="Size",           value=f"{size} bytes")
+    embed.add_field(name="Content Type",   value=content_type)
+    embed.add_field(name="URL",            value=url, inline = False)
+    if duration != None:
+        embed.add_field(name="Duration",   value=f"{duration} seconds")
+    if waveform != None:
+        embed.add_field(name="Waveform",   value=waveform)
+
+    await ctx.send(embed=embed)
+
+save_file_cooldowns = {} # dictionary to store save_file user cooldowns
+
+@bot.slash_command(name="save_file", description="saves file to a folder on my laptop")
+async def file_saver(ctx, file: disnake.Attachment):
+    await ctx.response.defer()
+    if file.size > 4*1024*1024:
+        await ctx.send(f"this file weights more than **4** MB! (~**{math.ceil(file.size/1024)}** KB)")
+    else:
+
+        now = datetime.datetime.now()
+        last_used = save_file_cooldowns.get(ctx.author.id)
+
+        if last_used is not None:
+            # time since last use
+            when_used = (now - last_used).total_seconds()
+
+            if when_used < 60:
+                await ctx.send(f"this command is on cooldown <:typing:1133071627370897580>\ntry again in {round(60 - when_used)} seconds", ephemeral=True)
+                return
+
+        save_file_cooldowns[ctx.author.id] = now
+
+        filepath = get_file_path("shitpost", file.filename)
+        try:
+            await file.save(filepath)
+            await ctx.send(f"File saved successfully as '{filepath}'.")
+            channel=bot.get_channel(1187779030892675193)
+            await channel.send(f"**{ctx.author.name}** `{ctx.author.id}` added next file:\n{file.filename}")
+        except Exception as e:
+            await ctx.send(f"An error occurred while saving the file: {e}")
+
+@bot.slash_command(name="list_files", description="lists all files saved with /save_file")
+async def list_files(ctx):
+    embed=makeembed(1, os.listdir("shitpost"))
+    await ctx.send(embed=embed, components=makecomponents(embed.title))
+
+send_file_cooldowns = {} # dictionary to store save_file user cooldowns
+
+@bot.slash_command(name="send_file", description="sends any file saved using with /save_file")
+async def send_file(ctx, filename: str):
+    await ctx.response.defer()
+    if not filename in os.listdir("shitpost"):
+        ctx.send(f"file `{filename}` doesnt exist", ephemeral=True)
+    else:
+        now = datetime.datetime.now()
+        last_used = save_file_cooldowns.get(ctx.author.id)
+
+        if last_used is not None:
+            # time since last use
+            when_used = (now - last_used).total_seconds()
+
+            if when_used < 20:
+                await ctx.send(f"this command is on cooldown <:typing:1133071627370897580>\ntry again in {round(20 - when_used)} seconds", ephemeral=True)
+                return
+
+        save_file_cooldowns[ctx.author.id] = now
+        await ctx.send(filename, file=disnake.File(get_file_path("shitpost", filename)))
+
 bot.run(open("TOKEN.txt").read())
