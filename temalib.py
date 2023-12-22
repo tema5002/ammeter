@@ -1,11 +1,27 @@
 from random import randint
 import codecs
+import os
 
 def openfile(file):
     return codecs.open(file, encoding="utf-8")
 
 def editfile(file):
     return codecs.open(file, "w", encoding="utf-8")
+
+def get_file_path(folder, filename):
+
+    folder_dir = os.path.dirname(__file__)
+
+    # creates the filename folder if it doesnt exist
+    folder_dir = os.path.join(folder_dir, folder)
+    if not os.path.exists(folder_dir):
+        os.makedirs(folder_dir)
+
+    h = os.path.join(folder_dir, filename)
+    if not os.path.exists(h):
+        with open(h, "w") as f: pass
+
+    return h
 
 def bin(n,c):
     if n==0: return c
