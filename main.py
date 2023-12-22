@@ -808,7 +808,7 @@ send_file_cooldowns = {} # dictionary to store save_file user cooldowns
 async def send_file(ctx, filename: str):
     await ctx.response.defer()
     if not filename in os.listdir("shitpost"):
-        ctx.send(f"file `{filename}` doesnt exist", ephemeral=True)
+        await ctx.send(f"file `{filename}` doesnt exist", ephemeral=True)
     else:
         now = datetime.datetime.now()
         last_used = save_file_cooldowns.get(ctx.author.id)
