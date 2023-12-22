@@ -788,7 +788,10 @@ async def file_saver(ctx, file: disnake.Attachment, filename: str):
 
         save_file_cooldowns[ctx.author.id] = now
 
-        filepath = get_file_path("shitpost", filename)
+        if "." in file.filename:
+            filepath = get_file_path("shitpost", filename+file.filename[file.filename.rfind("."):])
+        else:
+            filepath = get_file_path("shitpost", filename)
         try:
             await file.save(filepath)
             await ctx.send(f"File saved successfully as '{filepath}'.")
