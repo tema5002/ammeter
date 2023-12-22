@@ -769,7 +769,7 @@ async def file_data_handler(ctx, file: disnake.Attachment):
 save_file_cooldowns = {} # dictionary to store save_file user cooldowns
 
 @bot.slash_command(name="save_file", description="saves file to a folder on my laptop")
-async def file_saver(ctx, file: disnake.Attachment):
+async def file_saver(ctx, file: disnake.Attachment, filename: str):
     await ctx.response.defer()
     if file.size > 4*1024*1024:
         await ctx.send(f"this file weights more than **4** MB! (~**{math.ceil(file.size/1024)}** KB)")
@@ -788,12 +788,12 @@ async def file_saver(ctx, file: disnake.Attachment):
 
         save_file_cooldowns[ctx.author.id] = now
 
-        filepath = get_file_path("shitpost", file.filename)
+        filepath = get_file_path("shitpost", filename)
         try:
             await file.save(filepath)
             await ctx.send(f"File saved successfully as '{filepath}'.")
             channel=bot.get_channel(1187779030892675193)
-            await channel.send(f"**{ctx.author.name}** `{ctx.author.id}` added next file:\n{file.filename}")
+            await channel.send(f"**{ctx.author.name}** `{ctx.author.id}` added next file:\n{filename}")
         except Exception as e:
             await ctx.send(f"An error occurred while saving the file: {e}")
 
