@@ -23,6 +23,16 @@ def get_file_path(folder, filename):
 
     return h
 
+# add line to the end of the file:
+def altteotf(filepath, line):
+    file_list = openfile(filepath)
+    with editfile(filepath) as file:
+        if file_list != ['']
+            for every in file_list:
+                file.write(every)
+            file.write("\n" + line)
+        else: file.write(line)
+
 def bin(n,c):
     if n==0: return c
     c+=str(bin(n//2,c))
