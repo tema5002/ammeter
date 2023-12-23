@@ -766,12 +766,20 @@ async def file_data_handler(ctx, file: disnake.Attachment):
 
     await ctx.send(embed=embed)
 
+save_file_trusteds=[
+    558979299177136164, # tema5002
+    801078409076670494, # cube
+    903650492754845728  # slinx92
+    ]
+
 save_file_cooldowns = {} # dictionary to store save_file user cooldowns
 
 @bot.slash_command(name="save_file", description="saves file to a folder on my laptop")
 async def file_saver(ctx, file: disnake.Attachment, filename: str):
     await ctx.response.defer()
-    if file.size > 4*1024*1024:
+    if not ctx.author.id in save_file_trusteds:
+        await ctx.send("you must be in trusted list to use this command",ephemeral=True)
+    elif file.size > 4*1024*1024:
         await ctx.send(f"this file weights more than **4** MB! (~**{math.ceil(file.size/1024)}** KB)")
     else:
 
@@ -782,8 +790,8 @@ async def file_saver(ctx, file: disnake.Attachment, filename: str):
             # time since last use
             when_used = (now - last_used).total_seconds()
 
-            if when_used < 60:
-                await ctx.send(f"this command is on cooldown <:typing:1133071627370897580>\ntry again in {round(60 - when_used)} seconds", ephemeral=True)
+            if when_used < 20:
+                await ctx.send(f"this command is on cooldown <:typing:1133071627370897580>\ntry again in {round(20 - when_used)} seconds", ephemeral=True)
                 return
 
         save_file_cooldowns[ctx.author.id] = now
@@ -796,7 +804,7 @@ async def file_saver(ctx, file: disnake.Attachment, filename: str):
             await file.save(filepath)
             await ctx.send(f"File saved successfully as '{filepath}'.")
             channel=bot.get_channel(1187779030892675193)
-            await channel.send(f"**{ctx.author.name}** `{ctx.author.id}` added next file:\n{filename}")
+            await channel.send(f"**{ctx.author.name}** `{ctx.author.id}` added file {filename}")
         except Exception as e:
             await ctx.send(f"An error occurred while saving the file: {e}")
 
@@ -820,8 +828,8 @@ async def send_file(ctx, filename: str):
             # time since last use
             when_used = (now - last_used).total_seconds()
 
-            if when_used < 20:
-                await ctx.send(f"this command is on cooldown <:typing:1133071627370897580>\ntry again in {round(20 - when_used)} seconds", ephemeral=True)
+            if when_used < 5:
+                await ctx.send(f"this command is on cooldown <:typing:1133071627370897580>\ntry again in {round(5 - when_used)} seconds", ephemeral=True)
                 return
 
         save_file_cooldowns[ctx.author.id] = now
