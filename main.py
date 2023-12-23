@@ -790,8 +790,8 @@ async def file_saver(ctx, file: disnake.Attachment, filename: str):
             # time since last use
             when_used = (now - last_used).total_seconds()
 
-            if when_used < 20:
-                await ctx.send(f"this command is on cooldown <:typing:1133071627370897580>\ntry again in {round(20 - when_used)} seconds", ephemeral=True)
+            if when_used < 60:
+                await ctx.send(f"this command is on cooldown <:typing:1133071627370897580>\ntry again in {round(60 - when_used)} seconds", ephemeral=True)
                 return
 
         save_file_cooldowns[ctx.author.id] = now
@@ -828,7 +828,7 @@ async def send_file(ctx, filename: str):
             # time since last use
             when_used = (now - last_used).total_seconds()
 
-            if when_used < 5:
+            if when_used < 20:
                 await ctx.send(f"this command is on cooldown <:typing:1133071627370897580>\ntry again in {round(5 - when_used)} seconds", ephemeral=True)
                 return
 
