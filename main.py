@@ -39,14 +39,14 @@ def makecomponents(uhh):
 
 
 # ACHIEVEMENTS
-class ach:
+class Ach:
     title="Unknown"
     description="not defined achievement"
     emoji="<:regular:1188527241039204452>"
     noemoji="<:no_regular:1188527234693210243>"
 
 # defining achs
-unknown, sixAmperes, zyzzyzus, luck, aceSupporter, kys, dementia, wrongBot = ach(), ach(), ach(), ach(), ach(), ach(), ach(), ach()
+unknown, sixAmperes, zyzzyzus, luck, aceSupporter, kys, dementia, wrongBot = Ach(), Ach(), Ach(), Ach(), Ach(), Ach(), Ach(), Ach()
 
 # defining achs info
 sixAmperes.title, sixAmperes.description = "6 Amperes", "AAAAAA"
