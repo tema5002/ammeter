@@ -1,11 +1,7 @@
 # i absolutely have no idea what am i doing
 
-import disnake
-import wikipedia
-import asyncio
-import math
-import datetime
-from random import choice,randint
+import disnake, wikipedia, asyncio, math, os, datetime
+from random import choice, randint
 from temalib import * # very silly library made by me if you need it then ask :typing:
 from disnake.ext import commands
 from random import randint, choice
@@ -39,6 +35,76 @@ def makecomponents(uhh):
         if h != g:
             components+=[disnake.ui.Button(label=">", style=disnake.ButtonStyle.secondary, custom_id=str(h+1))]
         return components
+
+
+
+# ACHIEVEMENTS
+class ach:
+    title="Unknown"
+    description="not defined achievement"
+    emoji="<:regular:1188527241039204452>"
+    noemoji="<:no_regular:1188527234693210243>"
+
+# defining achs
+unknown, sixAmperes, zyzzyzus, luck, aceSupporter, kys, dementia, wrongBot = ach(), ach(), ach(), ach(), ach(), ach(), ach(), ach()
+
+# defining achs info
+sixAmperes.title, sixAmperes.description = "6 Amperes", "AAAAAA"
+zyzzyzus.title, zyzzyzus.description, zyzzyzus.emoji, zyzzyzus.noemoji = "Zyzzyzus", "what is zyzzyzus", "<:question_mark:1188527237583097926>", "<:no_question_mark:1188527231937564822>"
+luck.title, luck.description, luck.emoji, luck.noemoji = "Luck 100", "There is 0.5% of getting this ach everytime you send messages", "<:luck:1188527217395912886>", "<:no_luck:1188527229026709635>"
+aceSupporter.title, aceSupporter.description, aceSupporter.emoji, aceSupporter.noemoji = "Asexual Supporter", "YOU SHOULD KEEP YOURSELF SAFE NOW", "<:ace:1188527210580160532>", "<:no_ace:1188527220017352727>"
+kys.title, kys.description, kys.emoji, kys.noemoji = "clearly a skill issue", "Find a way to die in ammeter", "<:kys:1188527215005155459>", "<:no_kys:1188527226992480416>"
+dementia.title, dementia.description, dementia.emoji, dementia.noemoji = "AMMETER HAS DEMENTIA", "Get ping higher than 500ms in /ping", "<:dementia:1188527213390340096>", "<:no_dementia:1188527223880290334>"
+wrongBot.title, wrongBot.description = "Wrong bot", "flowmigger and his family :joy::joy::grinning:"
+
+achs=[unknown, sixAmperes, zyzzyzus, luck, aceSupporter, kys, dementia, wrongBot]
+
+def get_ach(string):
+    for every in achs:
+        if every.title==string:
+            return every
+    if string!="": return achs[0]
+
+def getachs(id):
+    
+    folder_dir = os.path.join(os.path.dirname(__file__), "achs")
+    if not os.path.exists(folder_dir): os.makedirs(folder_dir)
+
+    filepath=os.path.join(folder_dir, str(id) + ".txt")
+    if not os.path.exists(filepath):
+        with open(filepath, "w") as f: pass
+
+    htemp = openfile(filepath).read().split("\n")
+    h = []
+    for every in htemp:
+        if every!="": h += [get_ach(every)]
+    return h
+
+def giveach(ach, member):
+    ach = get_ach(ach)
+    
+    # created the achs folder
+    folder_dir = os.path.join(os.path.dirname(__file__), "achs")
+    if not os.path.exists(folder_dir): os.makedirs(folder_dir)
+
+    # creates the member.id.txt
+    filepath = os.path.join(folder_dir, str(member.id)+".txt")
+    if not os.path.exists(filepath):
+        with open(filepath, "w") as f: pass
+
+    htemp = openfile(filepath).read().split("\n")
+    h = []
+
+    if not ach.title in openfile(filepath).read().split("\n"):
+        altteotf(filepath, ach.title)
+        embed = disnake.Embed(title = "New achievement!")
+        embed.add_field(name = f"{ach.emoji} {ach.title}", value = ach.description)
+        footer_dict={"text": f"Unlocked by {member.name}"}
+        embed.set_footer(**footer_dict)
+        return embed
+
+
+
 
 # holy shit thats more than 100 strings of code just for "funny" text
 # splashes
@@ -251,6 +317,7 @@ async def on_member_remove(member):
 async def help_listener(ctx):
     if ctx.component.custom_id=="kys":
         await ctx.send("<:kysmen:1160939083011469393>", ephemeral=True)
+        await ctx.send(embed = giveach("clearly a skill issue", ctx.author))
     else:
         h = ctx.component.custom_id
         embed=makeembed(int(h), os.listdir("shitpost"))
@@ -266,6 +333,12 @@ async def on_guild_remove(guild):
 async def on_message(message):
     await bot.process_commands(message)
     balls=message.content.lower()
+    
+    if randint (0, 2000) == 0:
+        await message.channel.send(embed = giveach("Luck 100", message.author))
+    if balls.startswith("hey ammeter add tag ") or balls.startswith("hey ammeter remove tag "):
+        await message.channel.send(embed = giveach("Wrong bot", message.author))
+    
     if "asexuality is not real" in balls.replace("are","is"):
         await message.reply("amigger and his family 😂😂😀")
         try:
@@ -273,6 +346,7 @@ async def on_message(message):
         except: pass
     if "asexuality is real" in balls.replace("`",""):
         await message.reply(file=disnake.File("kysNOW.jpg"))
+        await message.channel.send(embed = giveach("Asexual Supporter", message.author))
 
     if message.author.id==553093932012011520:
         await message.reply("заткнись курица😤shut up chicken😡πи$daчек прикрыла😋 (я абослют😈)🙀зткнс крца🤐зоткися курапаточка🙄💅З А Т К Н И С Ь🤫К У Р Е Ц А🐓")
@@ -579,14 +653,22 @@ async def someone(ctx):
 async def ping(ctx):
     await ctx.response.defer()
     hh=round(bot.latency*1000)
-    if hh>=100000:
-        await ctx.send(f"ammeter seriously suffers with {hh}ms ping")
+    if hh>=25000:
+        await ctx.send(f"FUCKING FUCK IT HAS {hh}MS PING")
     elif hh>=10000:
-        await ctx.send(f"ammeter has serious dementia level with {hh}ms ping")
+        await ctx.send(f"hell naw how is {hh}ms ping possible")
+    elif hh>=5000:
+        await ctx.send(f"ammeter somehow fails to work even more with {hh}ms ping")
+    elif hh>=2500:
+        await ctx.send(f"ammeter seriously suffers to work with {hh}ms ping")
     elif hh>=1000:
+        await ctx.send(f"ammeter has SERIOUS dementia level with {hh}ms ping")
+    elif hh>=500:
         await ctx.send(f"ammeter has dementia with {hh}ms ping")
     else:
         await ctx.send(f"ammeter is melting tema5002's laptop with {hh}ms ping")
+    if hh>=500:
+        await ctx.send(embed = giveach("AMMETER HAS DEMENTIA", ctx.author))
 
 @bot.slash_command(name="say",description="talk as a bot")
 async def say(ctx,text:str):
@@ -714,15 +796,30 @@ async def rate(ctx, something: str):
     message=f"i would rate **{something}** "
     if something.lower()=="asexuality":
         message+="11 amperes! "+"<:kreisi_ampere:1181984050156687452>"*11
+    elif something.lower()=="zyzzyzus":
+        message=""
+        await ctx.send(embed = giveach("Zyzzyzus", ctx.author))
     else:
         if something[1:].replace('s','')==" ampere" and something[0].isdigit():
             h=int(something[0])
         else: h=randint(0,5)
         if h==1: message+="1 ampere! <:ampere:1181978287677915306>"+"<:no_ampere:1181978300462149642>"*4
         elif h==0 or 2<=h<=4: message+=f"{h} amperes! "+"<:ampere:1181978287677915306>"*h+"<:no_ampere:1181978300462149642>"*(5-h)
-        elif h==5: message+="5 amperes! "+"<:grass_ampere:1181978296695664650>"*5
-        else: message="im planning to add achievements so yes live with this here"
-    await ctx.send(message)
+        elif h==6:
+            message=""
+            await ctx.send(embed = giveach("6 Amperes", ctx.author))
+        else: message+="5 amperes! "+"<:grass_ampere:1181978296695664650>"*5
+    if message!="": await ctx.send(message)
+
+@bot.slash_command(name="achs", description="Lists your achievements")
+async def achievements(ctx):
+    embed = disnake.Embed(title=f"Achievements ({len(getachs(ctx.author.id))}/{len(achs)})")
+    for every in achs:
+        if every in getachs(ctx.author.id):
+            embed.add_field(name = f"{every.emoji} {every.title}", value = every.description)
+        else:
+            embed.add_field(name = f"{every.noemoji} {every.title}", value = every.description)
+    await ctx.send(embed = embed, ephemeral = True)
 
 @bot.slash_command(name="send_splash_here",description="make ammeter send splashes here on start (OWNER ONLY)")
 async def send_splash_here(ctx):
