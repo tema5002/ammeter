@@ -74,9 +74,8 @@ def getachs(id):
     if not os.path.exists(filepath):
         with open(filepath, "w") as f: pass
 
-    htemp = openfile(filepath).read().split("\n")
     h = []
-    for every in htemp:
+    for every in openfile(filepath).read().split("\n"):
         if every!="": h += [get_ach(every)]
     return h
 
@@ -91,9 +90,6 @@ def giveach(ach, member):
     filepath = os.path.join(folder_dir, str(member.id)+".txt")
     if not os.path.exists(filepath):
         with open(filepath, "w") as f: pass
-
-    htemp = openfile(filepath).read().split("\n")
-    h = []
 
     if not ach.title in openfile(filepath).read().split("\n"):
         altteotf(filepath, ach.title)
