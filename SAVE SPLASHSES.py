@@ -2,7 +2,7 @@ import pickle
 
 splashes=[
     "abotmin ask ammeter to ask icosahedron to staring cat react him", 
-    "currently 76 splashes",
+    "currently 77 splashes",
     "how to staring cat emoji",
     "every time bot enables it sends random text thats cool isnt",
     "im a workstahon mini",
@@ -76,7 +76,8 @@ splashes=[
     "do i really need to live milenakos mods?🤔🤔",
     "speaking fire🗣️🔥🗣️🔥",
     "люди гта 6 вийдет на консось нових поколеня",
-    "<:fruit:1187076240612540588><a:arrow:1187076103353925684>"
+    "<:fruit:1187076240612540588><a:arrow:1187076103353925684>",
+    "polyehdron store :department_store::convenience_store::anguished::department_store:"
     ]
 
 splashesinfo=[
@@ -135,8 +136,9 @@ splashesinfo=[
     "itamar_nudge on milenakos mods in advertisement",
     "sushi2627 on cat stand #memes",
     "this video description: https://youtu.be/lM_qJsAvujg",
-    "me"
+    "me",
+    "slinx92"
     ]
 
 pickle.dump(splashes, open("splashes.dat", "wb"))
-pickle.dump(splashes, open("splashesinfo.dat", "wb"))
+pickle.dump(splashesinfo, open("splashesinfo.dat", "wb"))
