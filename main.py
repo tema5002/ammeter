@@ -679,7 +679,7 @@ async def achievements(ctx):
             embed.add_field(name = f"{every.emoji} {every.title}", value = every.description)
         else:
             embed.add_field(name = f"{every.noemoji} {every.title}", value = every.description)
-    await ctx.send(embed = embed, ephemeral = True)
+    await ctx.send(embed = embed)
 
 @bot.slash_command(name="send_splash_here",description="make ammeter send splashes here on start (OWNER ONLY)")
 async def send_splash_here(ctx):
