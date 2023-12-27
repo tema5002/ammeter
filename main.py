@@ -1,6 +1,6 @@
 # i absolutely have no idea what am i doing
 
-import disnake, wikipedia, asyncio, math, os, datetime
+import disnake, wikipedia, asyncio, math, os, datetime, pickle
 from random import choice, randint
 from temalib import * # very silly library made by me if you need it then ask :typing:
 from disnake.ext import commands
@@ -39,25 +39,14 @@ def makecomponents(uhh):
 
 
 # ACHIEVEMENTS
+
 class Ach:
     title="Unknown"
     description="not defined achievement"
     emoji="<:regular:1188527241039204452>"
     noemoji="<:no_regular:1188527234693210243>"
 
-# defining achs
-unknown, sixAmperes, zyzzyzus, luck, aceSupporter, kys, dementia, wrongBot = Ach(), Ach(), Ach(), Ach(), Ach(), Ach(), Ach(), Ach()
-
-# defining achs info
-sixAmperes.title, sixAmperes.description = "6 Amperes", "AAAAAA"
-zyzzyzus.title, zyzzyzus.description, zyzzyzus.emoji, zyzzyzus.noemoji = "Zyzzyzus", "what is zyzzyzus", "<:question_mark:1188527237583097926>", "<:no_question_mark:1188527231937564822>"
-luck.title, luck.description, luck.emoji, luck.noemoji = "Luck 100", "There is 0.5% of getting this ach everytime you send messages", "<:luck:1188527217395912886>", "<:no_luck:1188527229026709635>"
-aceSupporter.title, aceSupporter.description, aceSupporter.emoji, aceSupporter.noemoji = "Asexual Supporter", "YOU SHOULD KEEP YOURSELF SAFE NOW", "<:ace:1188527210580160532>", "<:no_ace:1188527220017352727>"
-kys.title, kys.description, kys.emoji, kys.noemoji = "clearly a skill issue", "Find a way to die in ammeter", "<:kys:1188527215005155459>", "<:no_kys:1188527226992480416>"
-dementia.title, dementia.description, dementia.emoji, dementia.noemoji = "AMMETER HAS DEMENTIA", "Get ping higher than 500ms in /ping", "<:dementia:1188527213390340096>", "<:no_dementia:1188527223880290334>"
-wrongBot.title, wrongBot.description = "Wrong bot", "flowmigger and his family :joy::joy::grinning:"
-
-achs=[unknown, sixAmperes, zyzzyzus, luck, aceSupporter, kys, dementia, wrongBot]
+achs = pickle.load(open("achs.dat", "rb"))
 
 def get_ach(string):
     for every in achs:
@@ -101,146 +90,8 @@ def giveach(ach, member):
 
 
 
-
-# holy shit thats more than 100 strings of code just for "funny" text
-# splashes
-splashes=[
-    "abotmin ask ammeter to ask icosahedron to staring cat react him", 
-    "currently 76 splashes",
-    "how to staring cat emoji",
-    "every time bot enables it sends random text thats cool isnt",
-    "im a workstahon mini",
-    "silly proglet V1; cellua good indev2 xnopyt",
-    "hello",
-    "undefined is defined as undefined",
-    "picardibot plays with my balls and likes it",
-    "Also try icosahedron!",
-    "did i leak my token",
-    "nevermind",
-    "cube is unrotatable cube",
-    "prohressnet nowhen",
-    "https://prohressnet.xtema5002x.repl.co",
-    "https://prohressnet.xtema5002x.repl.co/src/eto_i_est_am_nyam.mp4",
-    "i have a fact that will definitely shock you but im not gonna tell it because meh",
-    "your mom will be deleted by ammeterhahahahhaha",
-    "is team5002 real",
-    "owner of this bot sometimes wants to be a jellyfish",
-    "this splash was removed",
-    "theres no progresstation and workstahon flag :skull:",
-    "slinx's attic is the most silly discord server you DEFINITELY should join!!!!!!!",
-    "\"breaking good\" - 💀💀💀\n\nthats a long story",
-    "you're*",
-    "jsab stands for **j**ust ||**s**illy **a**ss **b**alls||",
-    "lets drink to the health of indie developers!!!!",
-    '```py\nwhile True:\n    print("\\n")\n    h=open("splashes_channels.txt").read().split()\n    for every in h:\n        channel=bot.get_channel(int(every))\n        if channel!=None:\n            await channel.send(choice(splashes))\n            print(f"sending splash on {channel} ({channel.guild})")\n        else:\n            print("cant send splash 💀💀💀")\n            with open("splashes_channels.txt","w") as splasheschannels:\n                for everything in h:\n                    if everything!=every:\n                        splasheschannels.write(f"{everything}\\n")\n    print("\\n")\n    await asyncio.sleep(150)```',
-    "workstindows 11 professional",
-    "🧊",
-    "RUSHING DEEZ CATS",
-    "voltmatter2",
-    "AUGUST 12 2036 THE HEAT DEATH OF THE UNIVERSE",
-    "voltmeter killed proglet",
-    "Ihatelampadaire",
-    "расстрел",
-    "https://tryitands.ee",
-    "https://media.discordapp.net/attachments/1067491425484296292/1121410297052282931/cat_cat.gif",
-    "I declare myself a 600amper power supply unit",
-    "im sexually attracted to hydrogen uwu",
-    "Tuctdioioeaern",
-    "сигма сигма сигма",
-    "hog rider attacks!!!!",
-    "please do not forget to post cat next 19th date",
-    "spider man cowboy 😅😍😄😅😄😊😄🤠🤠🤠",
-    "google spread",
-    "skull meoji",
-    "сюжет очень затягивает, геймплей и графика просто шикарны, постоянно возвращаюсь в эту игру, 10/10",
-    "<:p2aperture:1157321484797227108> Aperture Science Sanitizer 564.0.0 Pro Max Ultra Deluxe Bottle Java Edition x86 For Workstations Without SMS And Registration",
-    "FRINKIFAIL BAD FRINKIFAIL BAD FRINKIFAIL BA",
-    "Be there! Be square!",
-    "Tema5002 is a city with the population of 197 million people. It is the capital city of Staring Cat Land.",
-    "wamter",
-    "the cells moved and i was like wow cool so that was yes play game now",
-    "tellurium#8399",
-    "Да кто такие эти ваши скибиди туалеты",
-    "ампержопа",
-    "Competing in пульт от ядерки",
-    "https://balls.com/",
-    "at the speed of lignt",
-    "wouse wouse wouse wouse wouse wouse wouse wouse wouse wouse wouse wouse wouse wouse wouse wouse",
-    "ULTRASKILLISSUE",
-    "geomeyru dash",
-    "HAHA YES I LEAKED ICOSAHEDRON TOKEN",
-    "never call me that again stupid nig",
-    "waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka",
-    "<:ace_flag:1181617159210803330><:ace_flag:1181617159210803330><:ace_flag:1181617159210803330> people from this country are so cool omg",
-    "guys lets cook the cake :)",
-    "@germancountryball ты играеш в GTA 5",
-    "dont go doin drugs kids",
-    "Developer Sanity: 47%",
-    "Hello hi sir thank",
-    "do i really need to live milenakos mods?🤔🤔",
-    "speaking fire🗣️🔥🗣️🔥",
-    "люди гта 6 вийдет на консось нових поколеня",
-    "<:fruit:1187076240612540588><a:arrow:1187076103353925684>"
-    ]
-# splashes info
-splashesinfo=[
-    "me", "me",
-    "me trying to realise how does disnake work",
-    "me", "me", "me", "me", "me",
-    "me (cring)",
-    "me", "me",
-    "guy wanted to help me with splashes and said this so yes",
-    "me", "me", "me", "me", "me", 
-    "minkos on sillyballs6969420",
-    "me",
-    "me after biology lesson",
-    "who this could possibly be",
-    "me", "me",
-    "me after fixing ammeter's bugs",
-    "me",
-    "cube",
-    "me", "me",
-    "slinx92 somewhere",
-    "rusher7629's display name on cat stand",
-    "rusher7629 on cat stand",
-    "me after calling ammeter antimatter",
-    "me",
-    "me after playing worms armageddon",
-    "me", "me", "me", "me", "me", "me", 
-    "crs25001 was saying something spamming and i copied first several symbols",
-    "me", "me", "me",
-    "me and slinx92",
-    "someone",
-    "me",
-    "someone in steam reviews on sharex",
-    "me", "me",
-    "me after mc live 2023 trailer",
-    "slinx92",
-    "astroleaf in lampadaire's steam profile",
-    "nathancrazy's review on cell machine indev",
-    "me",
-    "someone in telegram",
-    "slinx92",
-    "the teleporter cell's rich presence",
-    "me",
-    "cube on slinx's attic",
-    "someone on cell machine server",
-    "nicejs's status",
-    "mileankos's review on geometry dash",
-    "ME BEING INSANE",
-    "slinx muting bobmaster69",
-    "someone on cat stand",
-    "me",
-    "me (all asexuals are obsessed with cakes there is no exceptions)",
-    "maranw on proglet software",
-    "random mari0 mappack",
-    "cmmm+ splash",
-    "someone silly on pinterest",
-    "itamar_nudge on milenakos mods in advertisement",
-    "sushi2627 on cat stand #memes",
-    "this video description: https://youtu.be/lM_qJsAvujg",
-    "me"
-    ]
+splashes = pickle.load(open("splashes.dat", "rb"))
+splashesinfo = pickle.load(open("splashesinfo.dat", "rb"))
 
 sillyis=[
     "tried to say",
@@ -613,6 +464,16 @@ async def on_message(message):
             await message.add_reaction(bot.get_emoji(1152504159279530054)) #typing
 
 
+    if message.guild.id==1142510583699226744 and message.author.id==966695034340663367 and ("has appeared!" in message.content):
+        await message.channel.send("cat")
+    
+    alphabet="abcdefghijklmnopqrstuvwxyz"
+    if len(message.content)==1:
+        if message.content.lower() in alphabet:
+            index=alphabet.find(balls)
+            await message.add_reaction("🇦🇧🇨🇩🇪🇫🇬🇭🇮🇯🇰🇱🇲🇳🇴🇵🇶🇷🇸🇹🇺🇻🇼🇽🇾🇿"[index])
+
+
     # if theres 3 "n't" messages bot kindly asks you to shut the fu
     global counter
     async for message in message.channel.history(limit=3):
@@ -621,10 +482,6 @@ async def on_message(message):
         else: counter=0
     if counter>2:
         await message.channel.send("stfu")
-
-
-    if message.guild.id==1142510583699226744 and message.author.id==966695034340663367 and ("has appeared!" in message.content):
-        await message.channel.send("cat")
 
 # :typing::arrow_left::typing:
 @bot.event
@@ -862,7 +719,8 @@ async def file_data_handler(ctx, file: disnake.Attachment):
 save_file_trusteds=[
     558979299177136164, # tema5002
     801078409076670494, # cube
-    903650492754845728  # slinx92
+    903650492754845728, # slinx92
+    712639066373619754  # aflyde (hitler - flowmeter 2023)
     ]
 
 save_file_cooldowns = {} # dictionary to store save_file user cooldowns
