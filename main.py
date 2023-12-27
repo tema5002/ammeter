@@ -786,4 +786,19 @@ async def send_file(ctx, filename: str):
         save_file_cooldowns[ctx.author.id] = now
         await ctx.send(filename, file=disnake.File(get_file_path("shitpost", filename)))
 
+
+@bot.slash_command(name="sort", description="Sort file")
+async def send_file(ctx, file: disnake.Attachment):
+    await ctx.response.defer()
+    if file.size > 128*1024:
+        await ctx.send(f"this file weights more than **128** KB! (~**{math.ceil(file.size/1024)}** KB)")
+    elif file.filename[file.filename.rfind(".")+1:] != "txt":
+        h=file.filename[file.filename.rfind(".")+1:]
+        await ctx.send(f"this is not a txt file :skull: ({h})")
+    else:
+        await file.save(get_file_path("temp", "input.txt"))
+        with open(get_file_path("temp", "output.txt"),"w") as output:
+            for every in sorted(open(get_file_path("temp", "input.txt")).readlines()): output.write(every)
+        await ctx.send(file.filename, file=disnake.File(get_file_path("temp", "output.txt")))
+
 bot.run(open("TOKEN.txt").read())
