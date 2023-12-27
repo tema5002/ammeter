@@ -409,6 +409,8 @@ async def on_message(message):
         await message.add_reaction(bot.get_emoji(1180533040871649442)) #yeh
     if "aperture sanity" in balls:
         await message.add_reaction(bot.get_emoji(1181994734957375549)) #sane
+    if "@germancountryball ты играеш в gta 5" in balls:
+        await message.add_reaction(bot.get_emoji(1189619015556022404))
     if "i eat kids" in balls:
         await message.add_reaction("😋")
     if "add sex"==balls:
@@ -567,9 +569,14 @@ async def stats(ctx):
             h=every.name
             record=every.member_count
     embed=disnake.Embed(title="amigger stats",color=0x00FFFF,description=
-        f"{len(bot.guilds)} servers and {idiots} servers"+
+        f"{len(bot.guilds)} servers and {idiots} servers\n"+
         f"{len(splashes)} splashes currently\n"+
         f"biggest server is **{h}** with **{record}** members")
+    await ctx.send(embed=embed)
+
+@bot.slash_command(name="pi_search", description="Search for digits in pi")
+async def send_file(ctx, digits: int):
+    await ctx.send("this is not added yet <:typing:1133071627370897580>")
 
 @bot.slash_command(name="splashes",description="sends splash")
 async def sendsplash(ctx,id:int):
