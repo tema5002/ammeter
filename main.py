@@ -569,7 +569,7 @@ async def stats(ctx):
             h=every.name
             record=every.member_count
     embed=disnake.Embed(title="amigger stats",color=0x00FFFF,description=
-        f"{len(bot.guilds)} servers and {idiots} servers\n"+
+        f"{len(bot.guilds)} servers and {idiots} members\n"+
         f"{len(splashes)} splashes currently\n"+
         f"biggest server is **{h}** with **{record}** members")
     await ctx.send(embed=embed)
