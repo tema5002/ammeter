@@ -748,11 +748,12 @@ async def file_data_handler(ctx, file: disnake.Attachment):
     await ctx.send(embed=embed)
 
 save_file_trusteds=[
-    558979299177136164, # tema5002
-    801078409076670494, # cube
-    903650492754845728, # slinx92
-    712639066373619754, # aflyde (hitler - flowmeter 2023)
-    895984198916128848  # redkon.
+    558979299177136164,  # tema5002
+    801078409076670494,  # cube
+    903650492754845728,  # slinx92
+    712639066373619754,  # aflyde (hitler - flowmeter 2023)
+    1143072932596305932, # kesslon1632
+    895984198916128848   # redkon.
     ]
 
 save_file_cooldowns = {} # dictionary to store save_file user cooldowns
