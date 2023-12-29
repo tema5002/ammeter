@@ -217,7 +217,7 @@ async def on_message(message):
         await message.channel.send(embed = giveach("Wrong bot", message.author))
     
     if "asexuality is not real" in balls.replace("are","is"):
-        await message.reply("amigger and his family 😂😂😀")
+        await message.reply("я найду тебя и разобью твой ебальник 😊😊😊😊😊😊")
         try:
             await message.guild.timeout(message.author, duration=3600, reason="who asked")
         except: pass
@@ -684,6 +684,8 @@ async def rate(ctx, something: str):
     else:
         if something[1:].replace('s','')==" ampere" and something[0].isdigit():
             h=int(something[0])
+        elif something.lower().replace("lena", "n")=="minkos": h = 0
+
         else: h=randint(0,5)
         if h==1: message+="1 ampere! <:ampere:1181978287677915306>"+"<:no_ampere:1181978300462149642>"*4
         elif h==0 or 2<=h<=4: message+=f"{h} amperes! "+"<:ampere:1181978287677915306>"*h+"<:no_ampere:1181978300462149642>"*(5-h)
