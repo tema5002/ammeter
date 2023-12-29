@@ -192,7 +192,6 @@ async def on_message(message):
 
             if icosahedron == None: icosahedronOnline = False
             else: icosahedronOnline = (icosahedron.status == disnake.Status.online)
-            print(icosahedron.status)
 
             if abotmin == None: abotminOnline = False
             else: abotminOnline = (abotmin.status == disnake.Status.online)
@@ -207,7 +206,7 @@ async def on_message(message):
 
             if not icosahedronOnline:
                 react = True
-        if react: await message.add_reaction(bot.get_emoji(1152501238785638491)) #staring_cat
+        if react: await message.add_reaction(bot.get_emoji(1068922981197287464))
 
 
 
