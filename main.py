@@ -1,11 +1,10 @@
 # i absolutely have no idea what am i doing
 
 import disnake, wikipedia, asyncio, math, os, datetime, pickle
-from random import choice, randint
-from temalib import * # very silly library made by me if you need it then ask :typing:
 from disnake.ext import commands
-from random import randint, choice
+from random import choice, randint
 from defenitely_something import bsgenerator
+from temalib import *
 
 bot=commands.Bot(command_prefix="hey ammeter ",help_command=None,intents=disnake.Intents.all())
 
@@ -180,7 +179,39 @@ async def on_guild_remove(guild):
 async def on_message(message):
     await bot.process_commands(message)
     balls=message.content.lower()
-    
+
+    h = str(message.author.id)+".txt"
+    if h in os.listdir("scrl"):
+        react = False
+        h = open(get_file_path("scrl", h)).readline()
+        if h == "3":
+            react = True
+        elif h == "1":
+            icosahedron = message.guild.get_member(1030817797921583236)
+            abotmin = message.guild.get_member(1055396314403311616)
+
+            if icosahedron == None: icosahedronOnline = False
+            else: icosahedronOnline = (icosahedron.status == disnake.Status.online)
+            print(icosahedron.status)
+
+            if abotmin == None: abotminOnline = False
+            else: abotminOnline = (abotmin.status == disnake.Status.online)
+
+            if not(icosahedronOnline or abotminOnline):
+                react = True
+        elif h == "2":
+            icosahedron = message.guild.get_member(1030817797921583236)
+
+            if icosahedron == None: icosahedronOnline = False
+            else: icosahedronOnline = (icosahedron.status == disnake.Status.online)
+
+            if not icosahedronOnline:
+                react = True
+        if react: await message.add_reaction(bot.get_emoji(1152501238785638491)) #staring_cat
+
+
+
+
     if randint (0, 2000) == 0:
         await message.channel.send(embed = giveach("Luck 100", message.author))
     if balls.startswith("hey ammeter add tag ") or balls.startswith("hey ammeter remove tag "):
@@ -202,14 +233,6 @@ async def on_message(message):
         except: pass
 
     if message.author.id!=ammeter:
-
-        # slinx's attic messagelogger
-        if not message.author.bot:
-            channel=bot.get_channel(1174776639939428482)
-            if any(_ in message.content for _ in ["<@", "@here", "@everyone", "битбокс баттл с аботмином"]):
-                await channel.send("my creator dont allows me to send this")
-            elif message.content!="":
-                await channel.send(message.content)
 
         # reply bot's username if message has your username
         if message.author.display_name==message.content:
@@ -339,8 +362,8 @@ async def on_message(message):
         await message.channel.send("ANGITRAV"+"🍎"*randint(22,42))
     if "https://tenor.com/view/who-asked-did-i-ask-i-asked-meme-get-real-gif-21114957"==balls:
         await message.channel.send("real")
-    if "<@979669953865216000>" in balls: #@thebreadcell
-        await message.channel.send("please kill that nigget")
+    #if "<@979669953865216000>" in balls: #@thebreadcell
+    #    await message.channel.send("please kill that nigget")
     if "indev good" in balls:
         await message.reply(generate_ip(message.author.name)) #aperture sanity ip address generator
     if f"<@{ammeter}>" in balls:
@@ -527,7 +550,7 @@ async def ping(ctx):
 
 @bot.slash_command(name="say",description="talk as a bot")
 async def say(ctx,text:str):
-    if ctx.author.id in [tema5002,hexahedron1] or ctx.author.id==ctx.guild.owner_id:
+    if ctx.author.id in [tema5002,hexahedron1,895984198916128848] or ctx.author.id==ctx.guild.owner_id:
         await ctx.send("ok", ephemeral=True)
         await ctx.channel.send(text)
         print(f"{ctx.author.name} used /say to say\n{text}")
@@ -727,7 +750,8 @@ save_file_trusteds=[
     558979299177136164, # tema5002
     801078409076670494, # cube
     903650492754845728, # slinx92
-    712639066373619754  # aflyde (hitler - flowmeter 2023)
+    712639066373619754, # aflyde (hitler - flowmeter 2023)
+    895984198916128848  # redkon.
     ]
 
 save_file_cooldowns = {} # dictionary to store save_file user cooldowns
@@ -807,5 +831,17 @@ async def send_file(ctx, file: disnake.Attachment):
         with open(get_file_path("temp", "output.txt"),"w") as output:
             for every in sorted(open(get_file_path("temp", "input.txt")).readlines()): output.write(every)
         await ctx.send(file.filename, file=disnake.File(get_file_path("temp", "output.txt")))
+
+@bot.slash_command(name="staring_cat_react_me", description="make ammeter staring cat react you")
+async def staring_cat_react_me(ctx, h: str):
+    if not any(h==_ for _ in "0123"):
+        await ctx.send("# staring cat react list parameters\n0 - never\n1 - only when icosahedron and abotmin offline/not on this server\n2 - only when icosahedron offline/not on this server\n3 - always")
+    else:
+        filepath = get_file_path("scrl", str(ctx.author.id)+".txt")
+        currenth = openfile(filepath).read()
+        if len(currenth)!=1:
+            currenth="suprisingly nothing"
+        editfile(filepath).write(h)
+        await ctx.send(f"your staring_cat_react_me setting was set to **{h}** from **{currenth}**")
 
 bot.run(open("TOKEN.txt").read())
