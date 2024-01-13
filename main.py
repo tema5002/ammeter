@@ -232,7 +232,8 @@ async def on_message(message):
         except: pass
 
     if message.author.id!=ammeter:
-
+        if message.channel.id==1191694739578298469 and balls!="e" and message.author.id!=979669953865216000:
+            await message.delete()
         # reply bot's username if message has your username
         if message.author.display_name==message.content:
             await message.channel.send(message.guild.get_member(ammeter).display_name)
@@ -241,6 +242,8 @@ async def on_message(message):
                 await message.channel.send("stupid pingery")
             else:
                 await message.channel.send(message.author.display_name.replace("octopus",":octopus:").replace("Octopus",":octopus:"))
+                if message.author.display_name=="битбокс баттл с аботмином":
+                    await message.channel.send(embed = giveach("Beatbox", message.author))
 
         # THOSE WILL BE A FUNCTION ONE DAY
         # @everyo on proglet software
@@ -309,46 +312,47 @@ async def on_message(message):
                 "ампержопа помоги"
             ]))
 
-        # very badly made anti bread good system
-        bread=balls
-        a=0
-        while 2**a<len(balls): a+=1
-        bread=bread.replace("\""," ")
-        bread=bread.replace("\'"," ") 
-        bread=bread.replace(" ","")
-        bread=bread.replace("u","o")
-        bread=bread.replace("@","a")
-        bread=bread.replace("3","e")
-        bread=bread.replace("0","o")
-        bread=bread.replace("б","b")
-        bread=bread.replace("р","r")
-        bread=bread.replace("е","e")
-        bread=bread.replace("а","a")
-        bread=bread.replace("д","d")
-        bread=bread.replace("с","c")
-        bread=bread.replace("л","l")
-        bread=bread.replace("г","g")
-        bread=bread.replace("о","o")
-        bread=bread.replace("д","d")
-        bread=bread.replace("a","e")
-        while a!=0:
-            bread=bread.replace("bb","b")
-            bread=bread.replace("rr","r")
-            bread=bread.replace("ee","e")
-            bread=bread.replace("dd","d")
-            bread=bread.replace("cc","c")
-            bread=bread.replace("ll","l")
-            bread=bread.replace("gg","g")
-            bread=bread.replace("oo","o")
-            bread=bread.replace("dd","d")
-            a-=1
-        bread=bread.replace("cel","")
-        if ("bredgod" in bread) and not("bredgodnt" in bread):
-            await message.delete()
-            await message.channel.send(f"{message.author} {choice(sillyis)} `{message.content}`")
-        if any(i in bread for i in ["bredbed","bredgodnt"]):
-            await message.add_reaction(bot.get_emoji(1152506629879758878)) #thubm_up
-
+    #    # very badly made anti bread good system
+    #    bread=balls
+    #    a=0
+    #    while 2**a<len(balls): a+=1
+    #    bread=bread.replace("\""," ")
+    #    bread=bread.replace("\'"," ") 
+    #    bread=bread.replace(" ","")
+    #    bread=bread.replace("u","o")
+    #    bread=bread.replace("@","a")
+    #    bread=bread.replace("3","e")
+    #    bread=bread.replace("0","o")
+    #    bread=bread.replace("б","b")
+    #    bread=bread.replace("р","r")
+    #    bread=bread.replace("е","e")
+    #    bread=bread.replace("а","a")
+    #    bread=bread.replace("д","d")
+    #    bread=bread.replace("с","c")
+    #    bread=bread.replace("л","l")
+    #    bread=bread.replace("г","g")
+    #    bread=bread.replace("о","o")
+    #    bread=bread.replace("д","d")
+    #    bread=bread.replace("a","e")
+    #    while a!=0:
+    #        bread=bread.replace("bb","b")
+    #        bread=bread.replace("rr","r")
+    #        bread=bread.replace("ee","e")
+    #        bread=bread.replace("dd","d")
+    #        bread=bread.replace("cc","c")
+    #        bread=bread.replace("ll","l")
+    #        bread=bread.replace("gg","g")
+    #        bread=bread.replace("oo","o")
+    #        bread=bread.replace("dd","d")
+    #        a-=1
+    #    bread=bread.replace("cel","")
+    #    if ("bredgod" in bread) and not("bredgodnt" in bread):
+    #        await message.delete()
+    #        await message.channel.send(f"{message.author} {choice(sillyis)} `{message.content}`")
+    #    if any(i in bread for i in ["bredbed","bredgodnt"]):
+    #        await message.add_reaction(bot.get_emoji(1152506629879758878)) #thubm_up
+    #else:
+    #    if balls=="битбокс баттл с аботмином": await message.channel.send("АЛИСА ПОМОГИ ЧТО ЭТОТ ДЕБИЛ ХОЧЕТ ОТ МЕНЯ")
 
     # replies
     if "`[redacted]`" in balls:
@@ -359,6 +363,8 @@ async def on_message(message):
         await message.channel.send("hey icosahedron staring cat react me")
     if message.webhook_id==None and ":antigrav:" in balls and "яблоко" in balls:
         await message.channel.send("ANGITRAV"+"🍎"*randint(22,42))
+    if message.webhook_id==None and ":antaegeav:" in balls and "ябколко" in balls:
+        await message.channel.send("ANTIRAGRABA"+"🍏"*randint(22,42))
     if "https://tenor.com/view/who-asked-did-i-ask-i-asked-meme-get-real-gif-21114957"==balls:
         await message.channel.send("real")
     #if "<@979669953865216000>" in balls: #@thebreadcell
@@ -400,6 +406,8 @@ async def on_message(message):
     # random reactions
     if message.author.id==1168880756647526531: # good morning bot
         await message.add_reaction(bot.get_emoji(1180517585561849886)) #rolling_eyes_typing
+    if balls.replace("da", "да", 1).startswith("да"):
+        await message.add_reaction(bot.get_emoji(1195762346153488384)) #DA
 
     if "indevbad" in balls.replace("is","").replace(" ",""):
         await message.add_reaction(bot.get_emoji(1152506629879758878)) #thubm_up
@@ -547,14 +555,22 @@ async def ping(ctx):
     if hh>=500:
         await ctx.send(embed = giveach("AMMETER HAS DEMENTIA", ctx.author))
 
-@bot.slash_command(name="say",description="talk as a bot")
-async def say(ctx,text:str):
-    if ctx.author.id in [tema5002,hexahedron1,895984198916128848] or ctx.author.id==ctx.guild.owner_id:
-        await ctx.send("ok", ephemeral=True)
-        await ctx.channel.send(text)
-        print(f"{ctx.author.name} used /say to say\n{text}")
-    else:
-        await ctx.send("naaah bro this arent yours 💀💀💀💀",ephemeral=True)
+@bot.slash_command(description="talk as a bot")
+async def say(
+    ctx, text: str = "", reply_to: int = None, file: disnake.Attachment = None):
+
+    if not(ctx.author.id==tema5002 or ctx.author.id==ctx.guild.owner_id):
+        await ctx.send("naaah bro this arent yours 💀💀💀💀", ephemeral=True)
+        return
+
+    msg = reply_to or ctx.channel
+    try:
+        await msg.send(text, file=await file.to_file() if file else None)
+    except disnake.NotFound:
+        await ctx.send("message to reply to not found", ephemeral=True)
+        return
+
+    await ctx.send("message sent", ephemeral=True)
 
 @bot.slash_command(name="upload_avatar",description="upload someone's avatar as an emoji (NOT WORKING)")
 @commands.has_permissions(manage_emojis=True)
@@ -649,16 +665,21 @@ async def search(ctx,search):
             url=page.url)
         embed.set_image(url=page.images[0])
         await ctx.send(embed=embed)
-    except:
+    except Exception as e1:
+        e1=str(e1)
+        if len(e1)>150: e1 = e1[:150]+"..."
         try:
             page = wikipedia.page(search, auto_suggest=True)
             embed=disnake.Embed(
                 title=page.title,
-                description=wikipedia.summary(search, sentences=3))
+                description=wikipedia.summary(search, sentences=3),
+                url=page.url)
             embed.set_image(url=page.images[0])
-            await ctx.send(embed=embed)
-        except:
-            await ctx.send(f"{search} is fake")
+            await ctx.send(f"found with one exception:\n{e1}",embed=embed)
+        except Exception as e2:
+            e2=str(e2)
+            if len(e2)>150: e2 = e2[:150]+"..."
+            await ctx.send(f"couldn't find {search} with two exceptions:\n\n{e1}\n{e2}")
 
 @bot.slash_command(name="wikipedia_searches",description="test command :typing:")
 async def searches(ctx,search):
@@ -716,10 +737,7 @@ async def send_splash_here(ctx):
                         splasheschannels.write(f"{every}\n")
             await ctx.send(f"**#{ctx.channel}** was removed from splashes channels list ❌")
         else:
-            with open("splashes_channels.txt",'w') as splasheschannels:
-                for every in h:
-                    splasheschannels.write(f"{every}\n")
-                splasheschannels.write(str(ctx.channel.id))
+            altteotf("splashes_channels.txt", str(ctx.channel.id))
             await ctx.send(f"**#{ctx.channel}** was added to splashes channels list ✅")
     else:
         await ctx.send("you are not a server owner ‼️",ephemeral=True)
@@ -845,5 +863,39 @@ async def staring_cat_react_me(ctx, h: str):
             currenth="suprisingly nothing"
         editfile(filepath).write(h)
         await ctx.send(f"your staring_cat_react_me setting was set to **{h}** from **{currenth}**")
+
+#e_count_cooldowns = {}
+
+#@bot.slash_command(name="e_count", description="counts messages for each user in e war channel")
+#async def e_count(ctx):
+#    await ctx.response.defer()
+#    now = datetime.datetime.now()
+#    last_used = e_count_cooldowns.get(ctx.author.id)
+
+#    if last_used is not None:
+#        # time since last use
+#        when_used = (now - last_used).total_seconds()
+
+#        if when_used < 60:
+#            await ctx.send(f"this command is on cooldown <:typing:1133071627370897580>\ntry again in {round(60 - when_used)} seconds", ephemeral=True)
+#            return
+#    e_count_cooldowns[ctx.author.id] = now
+
+#    channel = bot.get_channel(1191694739578298469) # e war
+#    e_count = {}
+#    async for message in channel.history(limit=None):
+#        id = message.author.id
+#        if id in e_count:
+#            e_count[id] = e_count.get(id) + 1
+#        else: e_count[id] = 1
+
+#    description = ""
+#    for user, count in e_count.items():
+#        try:
+#            description += f"- {bot.get_user(user).mention}: {count}\n" 
+#        except Exception as e: description += f"epic error {e}"
+#    embed = disnake.Embed(description=description[:-1])
+
+    await ctx.send("e count", embed=embed)
 
 bot.run(open("TOKEN.txt").read())
