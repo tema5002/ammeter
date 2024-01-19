@@ -351,8 +351,7 @@ async def on_message(message):
     #        await message.channel.send(f"{message.author} {choice(sillyis)} `{message.content}`")
     #    if any(i in bread for i in ["bredbed","bredgodnt"]):
     #        await message.add_reaction(bot.get_emoji(1152506629879758878)) #thubm_up
-    #else:
-    #    if balls=="битбокс баттл с аботмином": await message.channel.send("АЛИСА ПОМОГИ ЧТО ЭТОТ ДЕБИЛ ХОЧЕТ ОТ МЕНЯ")
+    elif balls=="битбокс баттл с аботмином": await message.channel.send("АЛИСА ПОМОГИ ЧТО ЭТОТ ДЕБИЛ ХОЧЕТ ОТ МЕНЯ")
 
     # replies
     if "`[redacted]`" in balls:
@@ -401,6 +400,8 @@ async def on_message(message):
         await message.reply("test success")
     if "define bitches"==balls:
         await message.channel.send("something you dont have")
+    if balls.isdigit() and 8<=len(balls)<=100:
+        await message.channel.send(f"{balls} is a wuggy numbers 😂😂😂😂😂")
 
 
     # random reactions
@@ -593,8 +594,11 @@ async def file(ctx,file: disnake.Attachment):
 @bot.slash_command(name="info",description="info")
 async def info(ctx):
     embed=disnake.Embed(title="Ammeter",color=0x00FFFF,description=
-        f"very bad bot made by tema5002\n\nthanks to \n**slinx92**\n**thebreadcell** (dont ask)\n\n"+
-        "join [mileankso mods](https://discord.gg/WCTzD3YQEk) or i will do uhhhh idk")
+        "very bad bot made by tema5002\n\nthanks to \n**slinx92**\n**thebreadcell** (dont ask)\n\n"+
+        "[proglet software](https://discord.gg/gpRkkYjpGR): used for announcements\n"+
+        "[a silly server](https://discord.gg/rckcGzxKBR): probably official ammeter server\n"+
+        "[my honest reaction](https://discord.gg/SRM7CrSKRT): 99% of all emojis\n"+
+        "[Slinx's attic](https://discord.gg/9acZNWYSfN): i test ammeter mostly there")
     await ctx.send(embed=embed)
 
 @bot.slash_command(name="stats",description="stats")
@@ -824,17 +828,17 @@ async def send_file(ctx, filename: str):
         await ctx.send(f"file `{filename}` doesnt exist", ephemeral=True)
     else:
         now = datetime.datetime.now()
-        last_used = save_file_cooldowns.get(ctx.author.id)
+        last_used = send_file_cooldowns.get(ctx.author.id)
 
         if last_used is not None:
             # time since last use
             when_used = (now - last_used).total_seconds()
 
             if when_used < 20:
-                await ctx.send(f"this command is on cooldown <:typing:1133071627370897580>\ntry again in {round(5 - when_used)} seconds", ephemeral=True)
+                await ctx.send(f"this command is on cooldown <:typing:1133071627370897580>\ntry again in {round(20 - when_used)} seconds", ephemeral=True)
                 return
 
-        save_file_cooldowns[ctx.author.id] = now
+        send_file_cooldowns[ctx.author.id] = now
         await ctx.send(filename, file=disnake.File(get_file_path("shitpost", filename)))
 
 
