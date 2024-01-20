@@ -1,6 +1,6 @@
 # i absolutely have no idea what am i doing
 
-import disnake, wikipedia, asyncio, math, os, datetime, pickle
+import disnake, wikipedia, asyncio, math, os, datetime, pickle, subprocess
 from disnake.ext import commands
 from random import choice, randint
 from defenitely_something import bsgenerator
@@ -103,17 +103,19 @@ sillyis=[
     "maybe have dementia if he said"
     ]
 
+async def update_presence():
+
+    idiots=0
+    for every in bot.guilds:
+        idiots += every.member_count
+    await bot.change_presence(status=disnake.Status.online,
+                              activity=disnake.Activity(type=disnake.ActivityType.watching,
+                              name=f"for {idiots} idiots on {len(bot.guilds)} servers"))
+
 @bot.event
 async def on_ready():
     print(f"@{bot.user} is now online")
-
-    print("setting presence")
-    idiots=0
-    for every in bot.guilds:
-        idiots+=every.member_count
-        print(f"{idiots} people... ({every.member_count} people from {every.name})")
-    await bot.change_presence(status=disnake.Status.online,activity=disnake.Game(f"with {idiots} idiots on {len(bot.guilds)} servers"))
-    print("presence changed")
+    await update_presence()
     
     while True:
         print("\n")
@@ -362,8 +364,8 @@ async def on_message(message):
         await message.channel.send("hey icosahedron staring cat react me")
     if message.webhook_id==None and ":antigrav:" in balls and "яблоко" in balls:
         await message.channel.send("ANGITRAV"+"🍎"*randint(22,42))
-    if message.webhook_id==None and ":antaegeav:" in balls and "ябколко" in balls:
-        await message.channel.send("ANTIRAGRABA"+"🍏"*randint(22,42))
+    if message.webhook_id==None and ":anitgrva:" in balls and "ялобобко" in balls:
+        await message.channel.send("AGNINGRATA"+"🍍"*randint(22,42))
     if "https://tenor.com/view/who-asked-did-i-ask-i-asked-meme-get-real-gif-21114957"==balls:
         await message.channel.send("real")
     #if "<@979669953865216000>" in balls: #@thebreadcell
@@ -505,6 +507,26 @@ async def on_message(message):
         if message.content.lower() in alphabet:
             index=alphabet.find(balls)
             await message.add_reaction("🇦🇧🇨🇩🇪🇫🇬🇭🇮🇯🇰🇱🇲🇳🇴🇵🇶🇷🇸🇹🇺🇻🇼🇽🇾🇿"[index])
+        
+    #if balls == "hey ammeter start flowmeter":
+    #    if bot.get_guild(1042064947867287643).get_member(1184192159944028200).status == disnake.Status.offline:
+    #        os.startfile("C:\\Users\\User\\Documents\\folder without name\\discord bort\\flowmeter\\main.py")
+    #        await message.channel.send("<:thubm_up:1096323451985334363>")
+    #    else:
+    #        await message.channel.send("flowmeter is already online you dum dujm")
+        
+    #elif balls == "hey ammeter start ctqa bto":
+    #    if bot.get_guild(1042064947867287643).get_member(1174011590559928330).status == disnake.Status.offline:
+    #        os.startfile("C:\\Users\\User\\Documents\\folder without name\\discord bort\\ctqa bto\\main.py")
+    #        await message.channel.send("<:thubm_up:1096323451985334363>")
+    #    else:
+    #        await message.channel.send("ctqa bto is already online you silly")
+        
+    if balls == "hey ammeter start ammeter":
+        await message.add_reaction(bot.get_emoji(1196526737048227850))
+
+    elif "start ammeter" in balls:
+        await message.add_reaction(bot.get_emoji(1145359652691923085))
 
 
     # if theres 3 "n't" messages bot kindly asks you to shut the fu
@@ -515,6 +537,7 @@ async def on_message(message):
         else: counter=0
     if counter>2:
         await message.channel.send("stfu")
+
 
 # :typing::arrow_left::typing:
 @bot.event
@@ -555,6 +578,7 @@ async def ping(ctx):
         await ctx.send(f"ammeter is melting tema5002's laptop with {hh}ms ping")
     if hh>=500:
         await ctx.send(embed = giveach("AMMETER HAS DEMENTIA", ctx.author))
+    await update_presence()
 
 @bot.slash_command(description="talk as a bot")
 async def say(
