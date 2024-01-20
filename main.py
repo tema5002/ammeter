@@ -584,11 +584,16 @@ async def ping(ctx):
 
 @bot.slash_command(description="talk as a bot")
 async def say(
-    ctx, text: str = "", reply_to: int = None, file: disnake.Attachment = None):
+    ctx, text: str = "", reply_to: str = None, file: disnake.Attachment = None):
 
     if not(ctx.author.id==tema5002 or ctx.author.id==ctx.guild.owner_id):
         await ctx.send("naaah bro this arent yours 💀💀💀💀", ephemeral=True)
         return
+
+    if not reply_to.isdigit() and reply_to!=None:
+        await ctx.send("enter a digit for `reply_to`.", ephemeral=True)
+        return
+    reply_to = int(reply_to)
 
     msg = reply_to or ctx.channel
     try:
