@@ -1,6 +1,6 @@
 # i absolutely have no idea what am i doing
 
-import disnake, wikipedia, asyncio, math, os, datetime, pickle, subprocess
+import disnake, wikipedia, asyncio, math, os, datetime, pickle
 from disnake.ext import commands
 from random import choice, randint
 from defenitely_something import bsgenerator
@@ -364,6 +364,8 @@ async def on_message(message):
         await message.channel.send("hey icosahedron staring cat react me")
     if message.webhook_id==None and ":antigrav:" in balls and "яблоко" in balls:
         await message.channel.send("ANGITRAV"+"🍎"*randint(22,42))
+    if message.webhook_id==None and ":antaegeav:" in balls and "ябколко" in balls:
+        await message.channel.send("ANTIRAGRABA"+"🍏"*randint(22,42))
     if message.webhook_id==None and ":anitgrva:" in balls and "ялобобко" in balls:
         await message.channel.send("AGNINGRATA"+"🍍"*randint(22,42))
     if "https://tenor.com/view/who-asked-did-i-ask-i-asked-meme-get-real-gif-21114957"==balls:
