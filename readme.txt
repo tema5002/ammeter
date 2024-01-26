@@ -3,4 +3,4 @@ run SAVE ACHS.py and SAVE SPLASHES.py before running
 you need next to run this bot
 - disnake (https://disnake.dev/)
 - wikipedia (https://github.com/goldsmith/Wikipedia)
-temalib.py is silly thing i made for generating random ips
+- temalib (https://pypi.org/project/temalib/)
