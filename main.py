@@ -1,6 +1,6 @@
 # i absolutely have no idea what am i doing
 
-import disnake, wikipedia, asyncio, math, os, datetime, pickle
+import disnake, wikipedia, asyncio, os, datetime, pickle
 from disnake.ext import commands
 from random import choice, randint
 from defenitely_something import bsgenerator
