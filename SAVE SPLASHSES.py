@@ -2,7 +2,7 @@ import pickle
 
 splashes=[
     "abotmin ask ammeter to ask icosahedron to staring cat react him", 
-    "currently 78 splashes",
+    "currently 85 splashes",
     "how to staring cat emoji",
     "every time bot enables it sends random text thats cool isnt",
     "im a workstahon mini",
@@ -78,7 +78,14 @@ splashes=[
     "люди гта 6 вийдет на консось нових поколеня",
     "<:fruit:1187076240612540588><a:arrow:1187076103353925684>",
     "polyehdron store :department_store::convenience_store::anguished::department_store:",
-    "every time abotmin replies to ammeter he loses 1% of sanity. Please stop abotmin from replying to avoid insanity. #sanitymatters"
+    "every time abotmin replies to ammeter he loses 1% of sanity. Please stop abotmin from replying to avoid insanity. #sanitymatters",
+    "chiph chipi chpa chapa im going to launch nuclear bomb directly to your house and theyll go boom boom boom",
+    "ICOSAH...OOOO",
+    "slinx the tema5002",
+    "bread jumpscare",
+    "hgjunker",
+    "antgrave",
+    "але пожарные хочу банан"
     ]
 
 splashesinfo=[
@@ -139,7 +146,14 @@ splashesinfo=[
     "this video description: https://youtu.be/lM_qJsAvujg",
     "me",
     "slinx92",
-    "either cube or slinx idk"
+    "cube",
+    "dtpls20",
+    "slinx92",
+    "slinx92",
+    "me",
+    "cube",
+    "me",
+    "cube"
     ]
 
 pickle.dump(splashes, open("splashes.dat", "wb"))
