@@ -8,7 +8,7 @@ from temalib import *
 from ACHS import *
 from embed_lists_maker import *
 
-bot=commands.Bot(command_prefix="hey ammeter ",help_command=None,intents=disnake.Intents.all())
+bot=commands.Bot(command_prefix="am!",help_command=None,intents=disnake.Intents.all())
 
 # i store user ids here
 hexahedron1=801078409076670494
@@ -38,6 +38,19 @@ async def update_presence():
     await bot.change_presence(status=disnake.Status.online,
                               activity=disnake.Activity(type=disnake.ActivityType.watching,
                               name=f"for {idiots} idiots on {len(bot.guilds)} servers"))
+async def splashes_cycle():
+    while True:
+        h=open("splashes_channels.txt").read().split()
+        for every in h:
+            channel=bot.get_channel(int(every))
+            if channel!=None:
+                await channel.send(choice(splashes))
+                print(f"sending splash on {channel} ({channel.guild})")
+            else:
+                print(f"cant send splash to channel with id {every}")
+                #remove_line("splashes_channels.txt", every)
+        print("\n")
+        await asyncio.sleep(150)
 
 @bot.event
 async def on_ready():
@@ -52,19 +65,7 @@ async def on_ready():
     for i in bot.commands:
         print(f"{bot.command_prefix}{i.name}")
     await update_presence()
-    
-    while True:
-        h=open("splashes_channels.txt").read().split()
-        for every in h:
-            channel=bot.get_channel(int(every))
-            if channel!=None:
-                await channel.send(choice(splashes))
-                print(f"sending splash on {channel} ({channel.guild})")
-            else:
-                print(f"cant send splash to channel with id {every}")
-                #remove_line("splashes_channels.txt", every)
-        print("\n")
-        await asyncio.sleep(150)
+    bot.loop.create_task(splashes_cycle())
 
 # sends message on proglet software when someone joins
 @bot.event
@@ -372,15 +373,10 @@ async def on_message(message):
     if "hey ammeter this is a test"==msgl:
         nuh=[]
         for every in bot.guilds:
-            for everyone in every.members:
-                nuh += get_username(user, display_name=True, bot=True)
+            for user in every.members:
+                nuh += [f"{user.name}#{user.discriminator}".removesuffix("#0")+f" ({user.display_name})"+(" BOT" if user.bot else "")]
         nuh=sorted(list(set(nuh)))
-        with editfile(get_file_path(__file__, "temp", "silly.txt")) as proglet:
-            for every in nuh:
-                try:
-                    proglet.write(every+"\n")
-                except:
-                    proglet.write("ERROR\n")
+        editfile(get_file_path(__file__, "temp", "silly.txt")).write(str("\n".join(nuh)))
         await message.channel.send("Please enjoy this repeats.",
                                    file=disnake.File(get_file_path(__file__, "temp", "silly.txt")))
 
@@ -538,17 +534,17 @@ async def sendsplash(ctx,id:int):
     await ctx.send(embed=embed)
 
 @bot.command()
-async def death(ctx):
+async def test(ctx):
     if ctx.author.id==tema5002:
-        await ctx.send(file=disnake.File(get_file_path(__file__, "src", "metal_pipe_falling_sound.mp3")))
-        exit()
+        await ctx.send("hello ammeter please make this command work")
     else:
         await ctx.send("perm issue",delete_after=3.0)
 
 @bot.command()
-async def test(ctx):
+async def kys(ctx):
     if ctx.author.id==tema5002:
-        await ctx.send("hello ammeter please make this command work")
+        await ctx.send(file=disnake.File(get_file_path(__file__, "src", "metal_pipe_falling_sound.mp3")))
+        exit()
     else:
         await ctx.send("perm issue",delete_after=3.0)
 
@@ -655,12 +651,37 @@ async def staring_cat_react_me(ctx, h: str):
     if not any(h==_ for _ in "0123"):
         await ctx.send("# staring cat react list parameters\n0 - never\n1 - only when icosahedron and abotmin offline/not on this server\n2 - only when icosahedron offline/not on this server\n3 - always")
     else:
-        filepath = get_file_path(__file__, "scrl", str(ctx.author.id)+".txt")
+        filepath = get_file_path(__file__, "scrl", f"{ctx.author.id}.txt")
         currenth = openfile(filepath).read()
         if len(currenth)!=1:
             currenth="suprisingly nothing"
         editfile(filepath).write(h)
         await ctx.send(f"your staring_cat_react_me setting was set to **{h}** from **{currenth}**")
+
+@bot.slash_command(name="get_scrl", description="get staring cat react list")
+async def get_scrl(ctx):
+    scrl = os.listdir(get_folder_path(__file__, "scrl"))
+    title = "SCRL™️ (also known as staring cat react list)"
+    description = f"{len(scrl)} people are in staring cat react list\n"
+    for file in scrl:
+        user = bot.get_user(int(file.removesuffix(".txt"))).mention
+        arg = open(get_file_path(__file__, 'scrl', file)).read()
+        description += f"{user}: {arg}\n"
+    await ctx.send(embed=disnake.Embed(title=title, description=description[:-1]))
+
+@bot.command()
+async def scrl(ctx, user: disnake.Member, h: str):
+    if ctx.author.id!=tema5002:
+        return
+    if not any(h==_ for _ in "0123"):
+        await ctx.send("# staring cat react list parameters\n0 - never\n1 - only when icosahedron and abotmin offline/not on this server\n2 - only when icosahedron offline/not on this server\n3 - always")
+    else:
+        filepath = get_file_path(__file__, "scrl", f"{user.id}.txt")
+        currenth = openfile(filepath).read()
+        if len(currenth)!=1:
+            currenth="suprisingly nothing"
+        editfile(filepath).write(h)
+        await ctx.send(f"{user}'s staring_cat_react_me setting was set to **{h}** from **{currenth}**")
 
 @bot.slash_command(name="download_emojis", description="do you really need an explaination")
 async def download_emojis(ctx):
