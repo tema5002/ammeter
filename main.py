@@ -1,6 +1,6 @@
 # i absolutely have no idea what am i doing
 
-import disnake, wikipedia, asyncio, os, datetime, pickle
+import disnake, wikipedia, asyncio, os, datetime, pickle, zipfile, io
 from disnake.ext import commands
 from random import choice, randint
 from defenitely_something import bsgenerator
@@ -43,9 +43,14 @@ async def update_presence():
 async def on_ready():
     print(f"@{bot.user} is now ready")
     print("loaded slash commands:")
-    print("\n".join(f"/{i.name}" for i in bot.slash_commands))
+    for i in bot.slash_commands:
+        options = ""
+        for c in i.body.options:
+           options += " "+c.name
+        print(f"/{i.name}{options}")
     print("loaded non-slash commands:")
-    print("\n".join(f"{bot.command_prefix}{i.name}" for i in bot.commands))
+    for i in bot.commands:
+        print(f"{bot.command_prefix}{i.name}")
     await update_presence()
     
     while True:
@@ -185,23 +190,26 @@ async def on_message(message):
         elif "ампержопа ты тут?"==msgl:
             await message.channel.send(f"я не ты тут? я {message.guild.get_member(ammeter).display_name}")
         elif len(msgl)>8 and msgl[:9]=="ампержопа":
-            await message.channel.send(choice([
-                "сам ты жопа",
-                "зачем я тебе нужен",
-                "<:typing:1152504159279530054>⤴️",
-                "обратись в aperture sanity sanity centre",
-                "ЧТО ТТЕБЕ НАБДО ==ОТСАТИЬНЬ ОТ МЕНЯДьаазЛАЩУПЗАЛЗУ",
-                "баба это ты",
-                "маруся хуй",
-                "почему ты просто не можешь открыть гугл ты что silly",
-                "я не ампержопа ты что тупой",
-                "ДУ Ю СПИК ИНГЛИШ",
-                "да фиг знает",
-                "тебе говорить нельзя",
-                "иди ка ты знаешь куда",
-                "заткнись курица 🐔😂😂😂😔😔😔",
-                "ябколко\n"+"<:antaegeav:1184160903512461392>"*10
-                ]))
+            if message.author.id==1194595728882925698:
+                await message.channel.send("заткнись курица 🐔😂😂😂😔😔😔")
+            else:
+                await message.channel.send(choice([
+                    "сам ты жопа",
+                    "зачем я тебе нужен",
+                    "<:typing:1152504159279530054>⤴️",
+                    "обратись в aperture sanity sanity centre",
+                    "ЧТО ТТЕБЕ НАБДО ==ОТСАТИЬНЬ ОТ МЕНЯДьаазЛАЩУПЗАЛЗУ",
+                    "баба это ты",
+                    "маруся хуй",
+                    "почему ты просто не можешь открыть гугл ты что silly",
+                    "я не ампержопа ты что тупой",
+                    "ДУ Ю СПИК ИНГЛИШ",
+                    "да фиг знает",
+                    "тебе говорить нельзя",
+                    "иди ка ты знаешь куда",
+                    "заткнись курица 🐔😂😂😂😔😔😔",
+                    "ябколко\n"+"<:antaegeav:1184160903512461392>"*10
+                    ]))
         if msgl.startswith("hey siri"):
             await message.channel.send(choice([
                 "SIRI NEEDS A WIRELESES CHRAEAGEER AAAAAAAAAAAAAAAAAAAAA",
@@ -252,6 +260,8 @@ async def on_message(message):
     #        await message.add_reaction(bot.get_emoji(1152506629879758878)) #thubm_up
     elif msgl=="битбокс баттл с аботмином": await message.channel.send("АЛИСА ПОМОГИ ЧТО ЭТОТ ДЕБИЛ ХОЧЕТ ОТ МЕНЯ")
 
+    if message.channel.category_id == 1201443802938871878:
+        await message.add_reaction(bot.get_emoji(1197942180539551934))
     # replies
     if "`[redacted]`" in msgl:
         await message.channel.send("i am going to redact your balls")
@@ -259,6 +269,8 @@ async def on_message(message):
         await message.channel.send(file=disnake.File(get_file_path(__file__, "src", "KrO95WGn.mp4")))
     if "hey ammeter ask icosahedron to staring cat react you" in msgl:
         await message.channel.send("hey icosahedron staring cat react me")
+    if "did i leak my token"==msgl and message.author.bot and message.author!=bot.user:
+        await message.channel.send("yes i leaked your token 😃😃😃🫠🫠👼🖨️🕳️🔥🤗🤗😘😘")
 
     if message.webhook_id==None:
         for emoji, text, reply, char in [(":antigrav:",  "яблоко",   "ANGITRAV",    "🍎"),
@@ -649,6 +661,22 @@ async def staring_cat_react_me(ctx, h: str):
             currenth="suprisingly nothing"
         editfile(filepath).write(h)
         await ctx.send(f"your staring_cat_react_me setting was set to **{h}** from **{currenth}**")
+
+@bot.slash_command(name="download_emojis", description="do you really need an explaination")
+async def download_emojis(ctx):
+    await ctx.response.defer()
+    memory_file = io.BytesIO()
+    with zipfile.ZipFile(memory_file, "w", zipfile.ZIP_DEFLATED) as zipf:
+        emojis = {}
+        for emoji in ctx.guild.emojis:
+            if emoji.name in emojis: emojis[emoji.name]+=1
+            else: emojis[emoji.name] = 0
+            e = emojis[emoji.name]
+            emoji_name = emoji.name + f"~{e}" if e != 0 else "" + ".png" if emoji.animated else ".gif"
+            zipf.writestr(emoji_name, await emoji.read())
+
+    memory_file.seek(0)
+    await ctx.send(file=disnake.File(memory_file, filename=f"{ctx.guild.name} emojis.zip"))
 
 #e_count_cooldowns = {}
 
