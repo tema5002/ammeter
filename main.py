@@ -369,7 +369,7 @@ async def on_message(message):
         await message.add_reaction(bot.get_emoji(1152501238785638491)) #staring_cat
 
 
-    # prints all members known to ammeter (PLEASE SOMEONE OPTIMIZE THIS CODE FOR ME THANKS)
+    # prints all members known to ammeter
     if "hey ammeter this is a test"==msgl:
         nuh=[]
         for every in bot.guilds:
@@ -379,7 +379,6 @@ async def on_message(message):
         editfile(get_file_path(__file__, "temp", "silly.txt")).write(str("\n".join(nuh)))
         await message.channel.send("Please enjoy this repeats.",
                                    file=disnake.File(get_file_path(__file__, "temp", "silly.txt")))
-
 
     elif "hey ammeter send me all splashes"==msgl:
         with editfile(get_file_path(__file__, "temp", "splashes_list.txt")) as splist:
@@ -403,46 +402,66 @@ async def on_message(message):
             await message.add_reaction(bot.get_emoji(1152504159279530054)) #typing
     
     alphabet="abcdefghijklmnopqrstuvwxyz"
-    if len(message.content)==1:
-        if message.content.lower() in alphabet:
+    if len(msg)==1:
+        if msgl in alphabet:
             index=alphabet.find(msgl)
             await message.add_reaction("🇦🇧🇨🇩🇪🇫🇬🇭🇮🇯🇰🇱🇲🇳🇴🇵🇶🇷🇸🇹🇺🇻🇼🇽🇾🇿"[index])
-        
-    #if msgl == "hey ammeter start flowmeter":
-    #    if bot.get_guild(1042064947867287643).get_member(1184192159944028200).status == disnake.Status.offline:
-    #        os.startfile("C:\\Users\\User\\Documents\\folder without name\\discord bort\\flowmeter\\main.py")
-    #        await message.channel.send("<:thubm_up:1096323451985334363>")
-    #    else:
-    #        await message.channel.send("flowmeter is already online you dum dujm")
-        
-    #elif msgl == "hey ammeter start ctqa bto":
-    #    if bot.get_guild(1042064947867287643).get_member(1174011590559928330).status == disnake.Status.offline:
-    #        os.startfile("C:\\Users\\User\\Documents\\folder without name\\discord bort\\ctqa bto\\main.py")
-    #        await message.channel.send("<:thubm_up:1096323451985334363>")
-    #    else:
-    #        await message.channel.send("ctqa bto is already online you silly")
+        if msg.isdigit():
+            await message.add_reaction(["0️⃣", "1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣", "6️⃣", "7️⃣", "8️⃣", "9️⃣"][int(msg)])
 
-    if msgl == "hey ammeter start ammeter":
+    BOTLIST = [("flowmeter",  1184192159944028200),
+               ("ctqa bto",   1174011590559928330),
+               ("ctqabaord",  1201415019737382993),
+               ("arrow_left", 1198302558117183599)]
+
+    if msgl.startswith("hey ammeter run"):
+        if message.author.id == tema5002:
+            await message.channel.send(f"running {msg[16:]}")
+            os.startfile(msg[16:], cwd=os.path.dirname(msg[16:]))
+        else:
+            await message.channel.send("nouuuuu 😛😛😛 kill yourself 🎲🎲😥😥")
+    
+    elif msgl == "hey ammeter run all bots i have":
+        if message.author.id == tema5002:
+            for bot_name, bot_id, in BOTLIST:
+                guild = bot.get_guild(1042064947867287643)
+                if not is_online(guild, bot_id):
+                    os.startfile(f"C:\\Users\\User\\Documents\\folder without name\\discord bort\\{bot_name}\\main.py",
+                             cwd=f"C:\\Users\\User\\Documents\\folder without name\\discord bort\\{bot_name}")
+        else:
+            await message.channel.send("i jave ☕ no clue which bots do you have 🐂")
+
+    elif msgl == "hey ammeter start ammeter":
         await message.add_reaction(bot.get_emoji(1196526737048227850))
 
     elif "start ammeter" in msgl:
         await message.add_reaction(bot.get_emoji(1145359652691923085))
 
+    for bot_name, bot_id, in BOTLIST:
+        if msgl == f"hey ammeter start {bot_name}":
+            guild = bot.get_guild(1042064947867287643)
+            if not is_online(guild, bot_id):
+                os.startfile(f"C:\\Users\\User\\Documents\\folder without name\\discord bort\\{bot_name}\\main.py",
+                         cwd=f"C:\\Users\\User\\Documents\\folder without name\\discord bort\\{bot_name}")
+                await message.channel.send("<:thubm_up:1096323451985334363>")
+            else:
+                await message.channel.send(f"{bot_name} is already online you dum dujm")
+
 
     # if theres 3 "n't" messages bot kindly asks you to shut the fu
-    global counter
+    global nt_counter
     async for msge in message.channel.history(limit=3):
         if msge.content.lower()=="n't":
-            counter+=1
-        else: counter=0
-    if counter>2:
+            nt_counter+=1
+        else: nt_counter=0
+    if nt_counter>2:
         await message.channel.send("stfu")
 
 # get useless @someone role on proglet software
 @bot.slash_command(name="someone",description="Get \"someone\" role")
 async def someone(ctx):
     if ctx.guild.id==1132235625609834596:
-        role=disnake.utils.get(ctx.guild.roles, name="someone")
+        role = disnake.utils.get(ctx.guild.roles, name="someone")
         await ctx.author.add_roles(role)
         await ctx.send("perhaps")
     else:
